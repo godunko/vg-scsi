@@ -60,4 +60,14 @@ package SCSI.SAM5 with Pure is
    ACA_ACTIVE           : constant STATUS := 16#30#;
    TASK_ABORTED         : constant STATUS := 16#40#;
 
+   type SENSE_KEY is new A0B.Types.Unsigned_4;
+   type ADDITIONAL_SENSE_CODE is new A0B.Types.Unsigned_8;
+   type ADDITIONAL_SENSE_CODE_QUALIFIER is new A0B.Types.Unsigned_8;
+
+   type Sense_Data is record
+      SENSE_KEY                       : SCSI.SAM5.SENSE_KEY;
+      ADDITIONAL_SENSE_CODE           : SCSI.SAM5.ADDITIONAL_SENSE_CODE;
+      ADDITIONAL_SENSE_CODE_QUALIFIER : SCSI.SAM5.ADDITIONAL_SENSE_CODE_QUALIFIER;
+   end record;
+
 end SCSI.SAM5;
