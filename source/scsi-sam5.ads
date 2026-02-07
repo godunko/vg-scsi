@@ -32,4 +32,21 @@ package SCSI.SAM5 with Pure is
    type OPERATION_CODE is new A0B.Types.Unsigned_8;
    type SERVICE_ACTION is new A0B.Types.Unsigned_5;
 
+   type CONTROL is record
+      VS_0_7_6       : A0B.Types.Reserved_2 := A0B.Types.Zero;
+      Reserved_0_5_3 : A0B.Types.Reserved_3 := A0B.Types.Zero;
+      NACA           : Boolean;
+      Obsolete_0_1_1 : A0B.Types.Reserved_1 := A0B.Types.Zero;
+      Obsolete_0_0_0 : A0B.Types.Reserved_1 := A0B.Types.Zero;
+      --  SAM-3: LINK
+   end record with Size => Byte_Size;
+
+   for CONTROL use record
+      Obsolete_0_0_0 at 0 range 0 .. 0;
+      Obsolete_0_1_1 at 0 range 1 .. 1;
+      NACA           at 0 range 2 .. 2;
+      Reserved_0_5_3 at 0 range 3 .. 5;
+      VS_0_7_6       at 0 range 6 .. 7;
+   end record;
+
 end SCSI.SAM5;
