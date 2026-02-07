@@ -49,4 +49,15 @@ package SCSI.SAM5 with Pure is
       VS_0_7_6       at 0 range 6 .. 7;
    end record;
 
+   type STATUS is new A0B.Types.Unsigned_8;
+
+   GOOD                 : constant STATUS := 16#00#;
+   CHECK_CONDITION      : constant STATUS := 16#02#;
+   CONDITION_MET        : constant STATUS := 16#04#;
+   BUSY                 : constant STATUS := 16#08#;
+   RESERVATION_CONFLICT : constant STATUS := 16#18#;
+   TASK_SET_FULL        : constant STATUS := 16#28#;
+   ACA_ACTIVE           : constant STATUS := 16#30#;
+   TASK_ABORTED         : constant STATUS := 16#40#;
+
 end SCSI.SAM5;
