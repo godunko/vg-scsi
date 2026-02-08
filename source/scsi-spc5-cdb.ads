@@ -14,7 +14,7 @@ package SCSI.SPC5.CDB with Pure is
    REPORT_LUNS_CDB_Length     : constant := 12;
    TEST_UNIT_READY_CDB_Length : constant := 6;
 
-   --  INQUIRY (12)
+   --  INQUIRY [12]
 
    type INQUIRY_CDB is record
       OPERATION_CODE    : SCSI.SAM5.OPERATION_CODE := SCSI.SPC5.INQUIRY;
@@ -38,7 +38,7 @@ package SCSI.SPC5.CDB with Pure is
       CONTROL           at 5 range 0 .. 7;
    end record;
 
-   --  REPORT_LUNS (A0)
+   --  REPORT_LUNS [A0]
 
    type REPORT_LUNS_CDB is record
       OPERATION_CODE    : SCSI.SAM5.OPERATION_CODE := SCSI.SPC5.REPORT_LUNS;
@@ -66,7 +66,7 @@ package SCSI.SPC5.CDB with Pure is
       CONTROL           at 11 range 0 .. 7;
    end record;
 
-   --  TEST UNIT READY (00)
+   --  TEST UNIT READY [00]
 
    type TEST_UNIT_READY_CDB is record
       OPERATION_CODE : SCSI.SAM5.OPERATION_CODE := SCSI.SPC5.TEST_UNIT_READY;
