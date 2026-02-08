@@ -10,11 +10,12 @@ with SCSI.SAM5;
 
 package SCSI.SPC5 with Pure is
 
-   INQUIRY         : constant SCSI.SAM5.OPERATION_CODE := 16#12#;  --  18
+   INQUIRY              : constant SCSI.SAM5.OPERATION_CODE := 16#12#;  --  18
    --  MODE_SENSE_6_Operation_Code     : constant Operation_Code := 16#1A#;  --  26
-   REPORT_LUNS     : constant SCSI.SAM5.OPERATION_CODE := 16#A0#;  --  160
+   REPORT_LUNS          : constant SCSI.SAM5.OPERATION_CODE := 16#A0#;  --  160
    --  REQUEST_SENSE_Operation_Code    : constant Operation_Code := 16#03#;  --  3
-   TEST_UNIT_READY : constant SCSI.SAM5.OPERATION_CODE := 16#00#;  --  0
+   SERVICE_ACTION_IN_16 : constant SCSI.SAM5.OPERATION_CODE := 16#9E#;  --  158
+   TEST_UNIT_READY      : constant SCSI.SAM5.OPERATION_CODE := 16#00#;  --  0
 
    --  type Mode_Page_Code is new A0B.Types.Unsigned_6;
    type VPD_Page_Code  is new A0B.Types.Unsigned_8;
