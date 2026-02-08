@@ -16,10 +16,10 @@ package SCSI.SPC5.CDB with Pure is
 
    type INQUIRY_CDB is record
       OPERATION_CODE    : SCSI.SAM5.OPERATION_CODE := SCSI.SPC5.INQUIRY;
-      Reserved_1_7_2    : A0B.Types.Reserved_6 := A0B.Types.Zero;
-      Obsolete_1_1_1    : A0B.Types.Reserved_1 := A0B.Types.Zero;
-      EVPD              : Boolean              := False;
-      PAGE_CODE         : A0B.Types.Unsigned_8 := 0;
+      Reserved_1_7_2    : A0B.Types.Reserved_6     := A0B.Types.Zero;
+      Obsolete_1_1_1    : A0B.Types.Reserved_1     := A0B.Types.Zero;
+      EVPD              : Boolean                  := False;
+      PAGE_CODE         : SCSI.SPC5.VPD_Page_Code  := 0;
       ALLOCATION_LENGTH : A0B.Types.Big_Endian.Unsigned_16;
       CONTROL           : SCSI.SAM5.CONTROL;
    end record

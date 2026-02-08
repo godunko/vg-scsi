@@ -8,6 +8,7 @@
 
 --  with System;
 
+with A0B.Types;
 --  with A0B.Types.Arrays;
 --  with A0B.Types.Big_Endian;
 
@@ -24,9 +25,9 @@ package SCSI.SPC5 with Pure is
    --  use type A0B.Types.Unsigned_8;
    --
    --  type Mode_Page_Code is new A0B.Types.Unsigned_6;
-   --  type VPD_Page_Code  is new A0B.Types.Unsigned_8;
-   --
-   --  Supported_VPD_Pages_VPD_Page_Code : constant VPD_Page_Code := 16#00#;
+   type VPD_Page_Code  is new A0B.Types.Unsigned_8;
+
+   Supported_VPD_Pages_VPD_Page_Code : constant VPD_Page_Code := 16#00#;
    --  Unit_Serial_Number_VPD_Page_Code  : constant VPD_Page_Code := 16#80#;
 
    --  MODE_SENSE_6_CDB_Length    : constant := 6;

@@ -6,12 +6,14 @@
 
 with A0B.Types;
 
+with SCSI.SPC5;
+
 package SCSI.Commands.SPC with Pure is
 
    type INQUIRY_Command_Descriptor is record
-      EVPD              : Boolean;
-      PAGE_CODE         : A0B.Types.Unsigned_8;
       ALLOCATION_LENGTH : A0B.Types.Unsigned_32;
+      EVPD              : Boolean;
+      PAGE_CODE         : SCSI.SPC5.VPD_Page_Code;
    end record;
 
 end SCSI.Commands.SPC;
