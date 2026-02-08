@@ -11,6 +11,7 @@ with A0B.Types.Big_Endian;
 package SCSI.SPC5.CDB with Pure is
 
    INQUIRY_CDB_Length         : constant := 6;
+   TEST_UNIT_READY_CDB_Length : constant := 6;
 
    --  INQUIRY (12)
 
@@ -34,6 +35,28 @@ package SCSI.SPC5.CDB with Pure is
       PAGE_CODE                 at 2 range 0 .. 7;
       ALLOCATION_LENGTH         at 3 range 0 .. 15;
       CONTROL                   at 5 range 0 .. 7;
+   end record;
+
+   --  TEST UNIT READY (00)
+
+   type TEST_UNIT_READY_CDB is record
+      OPERATION_CODE : SCSI.SAM5.OPERATION_CODE := SCSI.SPC5.TEST_UNIT_READY;
+      Reserved_1     : A0B.Types.Reserved_8     := A0B.Types.Zero;
+      Reserved_2     : A0B.Types.Reserved_8     := A0B.Types.Zero;
+      Reserved_3     : A0B.Types.Reserved_8     := A0B.Types.Zero;
+      Reserved_4     : A0B.Types.Reserved_8     := A0B.Types.Zero;
+      CONTROL        : SCSI.SAM5.CONTROL;
+   end record
+     with Size      => TEST_UNIT_READY_CDB_Length * Byte_Size,
+          Bit_Order => System.Low_Order_First;
+
+   for TEST_UNIT_READY_CDB use record
+      OPERATION_CODE at 0 range 0 .. 7;
+      Reserved_1     at 1 range 0 .. 7;
+      Reserved_2     at 2 range 0 .. 7;
+      Reserved_3     at 3 range 0 .. 7;
+      Reserved_4     at 4 range 0 .. 7;
+      CONTROL        at 5 range 0 .. 7;
    end record;
 
 end SCSI.SPC5.CDB;

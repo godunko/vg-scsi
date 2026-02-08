@@ -4,26 +4,18 @@
 
 --  SCSI Primary Commands - 5 (SPC-5)
 
---  pragma Ada_2022;
-
---  with System;
-
 with A0B.Types;
---  with A0B.Types.Arrays;
---  with A0B.Types.Big_Endian;
 
 with SCSI.SAM5;
 
 package SCSI.SPC5 with Pure is
 
-   INQUIRY          : constant SCSI.SAM5.OPERATION_CODE := 16#12#;  --  18
+   INQUIRY         : constant SCSI.SAM5.OPERATION_CODE := 16#12#;  --  18
    --  MODE_SENSE_6_Operation_Code     : constant Operation_Code := 16#1A#;  --  26
    --  REPORT_LUNS_Operation_Code      : constant Operation_Code := 16#A0#;  --  160
    --  REQUEST_SENSE_Operation_Code    : constant Operation_Code := 16#03#;  --  3
-   --  TEST_UNIT_READY_Operation_Code  : constant Operation_Code := 16#00#;  --  0
+   TEST_UNIT_READY : constant SCSI.SAM5.OPERATION_CODE := 16#00#;  --  0
 
-   --  use type A0B.Types.Unsigned_8;
-   --
    --  type Mode_Page_Code is new A0B.Types.Unsigned_6;
    type VPD_Page_Code  is new A0B.Types.Unsigned_8;
 
@@ -32,7 +24,6 @@ package SCSI.SPC5 with Pure is
 
    --  MODE_SENSE_6_CDB_Length    : constant := 6;
    --  REQUEST_SENSE_Command_Block_Length   : constant := 6;
-   --  TEST_UNIT_READY_CDB_Length : constant := 6;
 
    NO_SENSE                       : constant SCSI.SAM5.Sense_Data :=
      (16#0#, 16#00#, 16#00#);
@@ -254,19 +245,5 @@ package SCSI.SPC5 with Pure is
    --  --     Timer_And_Protect                 : Timer_And_Protect_Page_Block;
    --  --  end record
    --  --    with Size => Mode_Parameter_List_Length * A0B.Types.Unsigned_8'Size;
-   --
-   --  --  TEST UNIT READY (00)
-   --
-   --  type TEST_UNIT_READY_CDB is record
-   --     OPERATION_CODE : SCSI.Operation_Code  :=
-   --       TEST_UNIT_READY_Operation_Code;
-   --     Reserved_1     : A0B.Types.Reserved_8;
-   --     Reserved_2     : A0B.Types.Reserved_8;
-   --     Reserved_3     : A0B.Types.Reserved_8;
-   --     Reserved_4     : A0B.Types.Reserved_8;
-   --     CONTROL        : A0B.Types.Reserved_8;
-   --  end record
-   --    with Size      => TEST_UNIT_READY_CDB_Length * Byte_Size;
-   --         --  Bit_Order => System.Low_Order_First;
 
 end SCSI.SPC5;
