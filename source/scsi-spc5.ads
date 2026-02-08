@@ -11,7 +11,7 @@ with SCSI.SAM5;
 package SCSI.SPC5 with Pure is
 
    INQUIRY              : constant SCSI.SAM5.OPERATION_CODE := 16#12#;  --  18
-   --  MODE_SENSE_6_Operation_Code     : constant Operation_Code := 16#1A#;  --  26
+   MODE_SENSE_6         : constant SCSI.SAM5.OPERATION_CODE := 16#1A#;  --  26
    REPORT_LUNS          : constant SCSI.SAM5.OPERATION_CODE := 16#A0#;  --  160
    --  REQUEST_SENSE_Operation_Code    : constant Operation_Code := 16#03#;  --  3
    SERVICE_ACTION_IN_16 : constant SCSI.SAM5.OPERATION_CODE := 16#9E#;  --  158
@@ -23,7 +23,10 @@ package SCSI.SPC5 with Pure is
    Supported_VPD_Pages_VPD_Page_Code : constant VPD_Page_Code := 16#00#;
    --  Unit_Serial_Number_VPD_Page_Code  : constant VPD_Page_Code := 16#80#;
 
-   --  MODE_SENSE_6_CDB_Length    : constant := 6;
+   type Mode_Page_Code is new A0B.Types.Unsigned_6;
+
+   All_Pages                              : constant Mode_Page_Code := 16#3F#;
+
    --  REQUEST_SENSE_Command_Block_Length   : constant := 6;
 
    NO_SENSE                       : constant SCSI.SAM5.Sense_Data :=
@@ -104,147 +107,5 @@ package SCSI.SPC5 with Pure is
    --     Reserved_16                     at 16 range 0 .. 7;
    --     Reserved_17                     at 17 range 0 .. 7;
    --  end record;
-
-   --  --  MODE_SENSE_6 (1A)
-   --
-   --  --  Media_Type_And_Write_Protect_Page      : constant := 16#00#;
-   --  --  Read_Write_Error_Recovery_Page         : constant := 16#01#;
-   --  --  Flexible_Disk_Page                     : constant := 16#05#;
-   --  --  Removable_Block_Access_Capacities_Page : constant := 16#1B#;
-   --  --  Timer_And_Protect_Page                 : constant := 16#1C#;
-   --  --  All_Pages                              : constant := 16#3F#;
-   --
-   --  type MODE_SENSE_6_CDB is record
-   --     OPERATION_CODE      : SCSI.Operation_Code :=
-   --       MODE_SENSE_6_Operation_Code;
-   --     Reserved_1_7_4      : A0B.Types.Reserved_4 := A0B.Types.Zero;
-   --     DBD                 : Boolean              := False;
-   --     Reserved_1_0_2      : A0B.Types.Reserved_3;
-   --     PC                  : A0B.Types.Unsigned_2;
-   --     PAGE_CODE           : A0B.Types.Unsigned_6;
-   --     SUBPAGE_CODE        : A0B.Types.Unsigned_8;
-   --     ALLOCATION_LENGTH   : A0B.Types.Unsigned_8;
-   --     CONTROL             : A0B.Types.Reserved_8;
-   --  end record
-   --    with Size      => MODE_SENSE_6_CDB_Length * Byte_Size,
-   --         Bit_Order => System.Low_Order_First;
-   --
-   --  for MODE_SENSE_6_CDB use record
-   --     OPERATION_CODE      at 0 range 0 .. 7;
-   --     Reserved_1_0_2      at 1 range 0 .. 2;
-   --     DBD                 at 1 range 3 .. 3;
-   --     Reserved_1_7_4      at 1 range 4 .. 7;
-   --     PAGE_CODE           at 2 range 0 .. 5;
-   --     PC                  at 2 range 6 .. 7;
-   --     SUBPAGE_CODE        at 3 range 0 .. 7;
-   --     ALLOCATION_LENGTH   at 4 range 0 .. 7;
-   --     CONTROL             at 5 range 0 .. 7;
-   --  end record;
-   --
-   --  --  Removable_Block_Access_Capabilities_Page_Block_Length : constant := 12;
-   --  --
-   --  --  type Removable_Block_Access_Capabilities_Page_Block is record
-   --  --     Parameters_Savable                 : A0B.Types.Unsigned_1 := 0;
-   --  --     Reserved_0                         : A0B.Types.Reserved_1;
-   --  --     Page_Code                          : A0B.Types.Unsigned_6 :=
-   --  --       Removable_Block_Access_Capacities_Page;
-   --  --     Page_Length                        : A0B.Types.Unsigned_8 := 16#0A#;
-   --  --     System_Floppy_Type                 : Boolean;
-   --  --     Supports_Reporting_Format_Progress : A0B.Types.Unsigned_1 := 0;
-   --  --     Reserved_2                         : A0B.Types.Reserved_6;
-   --  --     Non_CD                             : A0B.Types.Unsigned_1 := 0;
-   --  --     Single_Multiple_LUN                : A0B.Types.Unsigned_1 := 0;
-   --  --     Reserved_3                         : A0B.Types.Reserved_3;
-   --  --     Total_Number_Of_Logical_Units      : A0B.Types.Unsigned_3 := 1;
-   --  --     Reserved_4                         : A0B.Types.Reserved_8;
-   --  --     Reserved_5                         : A0B.Types.Reserved_8;
-   --  --     Reserved_6                         : A0B.Types.Reserved_8;
-   --  --     Reserved_7                         : A0B.Types.Reserved_8;
-   --  --     Reserved_8                         : A0B.Types.Reserved_8;
-   --  --     Reserved_9                         : A0B.Types.Reserved_8;
-   --  --     Reserved_10                        : A0B.Types.Reserved_8;
-   --  --     Reserved_11                        : A0B.Types.Reserved_8;
-   --  --  end record
-   --  --    with Size      =>
-   --  --           Removable_Block_Access_Capabilities_Page_Block_Length
-   --  --             * A0B.Types.Unsigned_8'Size,
-   --  --         Bit_Order => System.Low_Order_First;
-   --  --
-   --  --  for  Removable_Block_Access_Capabilities_Page_Block use record
-   --  --     Page_Code                          at 0 range 0 .. 5;
-   --  --     Reserved_0                         at 0 range 6 .. 6;
-   --  --     Parameters_Savable                 at 0 range 7 .. 7;
-   --  --     Page_Length                        at 1 range 0 .. 7;
-   --  --     Reserved_2                         at 2 range 0 .. 5;
-   --  --     Supports_Reporting_Format_Progress at 2 range 6 .. 6;
-   --  --     System_Floppy_Type                 at 2 range 7 .. 7;
-   --  --     Total_Number_Of_Logical_Units      at 3 range 0 .. 2;
-   --  --     Reserved_3                         at 3 range 3 .. 5;
-   --  --     Single_Multiple_LUN                at 3 range 6 .. 6;
-   --  --     Non_CD                             at 3 range 7 .. 7;
-   --  --     Reserved_4                         at 4 range 0 .. 7;
-   --  --     Reserved_5                         at 5 range 0 .. 7;
-   --  --     Reserved_6                         at 6 range 0 .. 7;
-   --  --     Reserved_7                         at 7 range 0 .. 7;
-   --  --     Reserved_8                         at 8 range 0 .. 7;
-   --  --     Reserved_9                         at 9 range 0 .. 7;
-   --  --     Reserved_10                        at 10 range 0 .. 7;
-   --  --     Reserved_11                        at 11 range 0 .. 7;
-   --  --  end record;
-   --  --
-   --  --  Timer_And_Protect_Page_Block_Length : constant := 8;
-   --  --
-   --  --  type Timer_And_Protect_Page_Block is record
-   --  --     Parameters_Savable                 : A0B.Types.Unsigned_1 := 0;
-   --  --     Reserved_0                         : A0B.Types.Reserved_1;
-   --  --     Page_Code                          : A0B.Types.Unsigned_6 :=
-   --  --       Timer_And_Protect_Page;
-   --  --     Page_Length                        : A0B.Types.Unsigned_8 := 16#06#;
-   --  --     Reserved_2                         : A0B.Types.Reserved_8;
-   --  --     Reserved_3                         : A0B.Types.Reserved_4;
-   --  --     Inactivity_Time_Multiplier         : A0B.Types.Unsigned_4;
-   --  --     Reserved_4                         : A0B.Types.Reserved_6;
-   --  --     Disable_Media_Access_Until_Power   : A0B.Types.Unsigned_1 := 0;
-   --  --     Software_Write_Protect_Until_Power : A0B.Types.Unsigned_1 := 0;
-   --  --     Reserved_5                         : A0B.Types.Reserved_8;
-   --  --     Reserved_6                         : A0B.Types.Reserved_8;
-   --  --     Reserved_7                         : A0B.Types.Reserved_8;
-   --  --  end record
-   --  --    with Size      =>
-   --  --           Timer_And_Protect_Page_Block_Length * A0B.Types.Unsigned_8'Size,
-   --  --         Bit_Order => System.Low_Order_First;
-   --  --
-   --  --  for Timer_And_Protect_Page_Block use record
-   --  --     Page_Code                          at 0 range 0 .. 5;
-   --  --     Reserved_0                         at 0 range 6 .. 6;
-   --  --     Parameters_Savable                 at 0 range 7 .. 7;
-   --  --     Page_Length                        at 1 range 0 .. 7;
-   --  --     Reserved_2                         at 2 range 0 .. 7;
-   --  --     Inactivity_Time_Multiplier         at 3 range 0 .. 3;
-   --  --     Reserved_3                         at 3 range 4 .. 7;
-   --  --     Software_Write_Protect_Until_Power at 4 range 0 .. 0;
-   --  --     Disable_Media_Access_Until_Power   at 4 range 1 .. 1;
-   --  --     Reserved_4                         at 4 range 2 .. 7;
-   --  --     Reserved_5                         at 5 range 0 .. 7;
-   --  --     Reserved_6                         at 6 range 0 .. 7;
-   --  --     Reserved_7                         at 7 range 0 .. 7;
-   --  --  end record;
-   --  --
-   --  --  Mode_Parameter_List_Length : constant :=
-   --  --    Mode_Parameter_Header_Block_Length
-   --  --      + Read_Write_Error_Recovery_Page_Block_Length
-   --  --      + Flexible_Disk_Page_Block_Length
-   --  --      + Removable_Block_Access_Capabilities_Page_Block_Length
-   --  --      + Timer_And_Protect_Page_Block_Length;
-   --  --
-   --  --  type Mode_Parameter_List is record
-   --  --     Header                            : Mode_Parameter_Header_Block;
-   --  --     Read_Write_Error_Recovery         : Read_Write_Error_Recovery_Page_Block;
-   --  --     Flexible_Disk                     : Flexible_Disk_Page_Block;
-   --  --     Removable_Block_Access_Capacities :
-   --  --       Removable_Block_Access_Capabilities_Page_Block;
-   --  --     Timer_And_Protect                 : Timer_And_Protect_Page_Block;
-   --  --  end record
-   --  --    with Size => Mode_Parameter_List_Length * A0B.Types.Unsigned_8'Size;
 
 end SCSI.SPC5;

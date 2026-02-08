@@ -16,6 +16,18 @@ package SCSI.Commands.SPC with Pure is
       PAGE_CODE         : SCSI.SPC5.VPD_Page_Code;
    end record;
 
+   type MODE_SENSE_Variant is (MODE_SENSE_6, MODE_SENSE_10);
+
+   type MODE_SENSE_Command_Descriptor is record
+      Variant           : MODE_SENSE_Variant;
+      ALLOCATION_LENGTH : A0B.Types.Unsigned_32;
+      LLBAA             : Boolean;
+      DBD               : Boolean;
+      PC                : A0B.Types.Unsigned_2;
+      PAGE_CODE         : SCSI.SPC5.Mode_Page_Code;
+      SUBPAGE_CODE      : A0B.Types.Unsigned_8;
+   end record;
+
    type REPORT_LUNS_Command_Descriptor is record
       ALLOCATION_LENGTH : A0B.Types.Unsigned_32;
       SELECT_REPORT     : A0B.Types.Unsigned_8;

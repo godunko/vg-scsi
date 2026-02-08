@@ -11,6 +11,7 @@ with A0B.Types.Big_Endian;
 package SCSI.SPC5.CDB with Pure is
 
    INQUIRY_CDB_Length              : constant := 6;
+   MODE_SENSE_6_CDB_Length         : constant := 6;
    REPORT_LUNS_CDB_Length          : constant := 12;
    SERVICE_ACTION_IN_16_CDB_Length : constant := 16;
    TEST_UNIT_READY_CDB_Length      : constant := 6;
@@ -41,8 +42,38 @@ package SCSI.SPC5.CDB with Pure is
       CONTROL           at 5 range 0 .. 7;
    end record;
 
+   --------------------------
+   --  MODE SENSE(6) [1A]  --
+   --------------------------
+
+   type MODE_SENSE_6_CDB is record
+      OPERATION_CODE    : SCSI.SAM5.OPERATION_CODE := SCSI.SPC5.MODE_SENSE_6;
+      Reserved_1_7_4    : A0B.Types.Reserved_4 := A0B.Types.Zero;
+      DBD               : Boolean              := False;
+      Reserved_1_0_2    : A0B.Types.Reserved_3;
+      PC                : A0B.Types.Unsigned_2;
+      PAGE_CODE         : SCSI.SPC5.Mode_Page_Code;
+      SUBPAGE_CODE      : A0B.Types.Unsigned_8;
+      ALLOCATION_LENGTH : A0B.Types.Unsigned_8;
+      CONTROL           : SCSI.SAM5.CONTROL;
+   end record
+     with Size      => MODE_SENSE_6_CDB_Length * Byte_Size,
+          Bit_Order => System.Low_Order_First;
+
+   for MODE_SENSE_6_CDB use record
+      OPERATION_CODE    at 0 range 0 .. 7;
+      Reserved_1_0_2    at 1 range 0 .. 2;
+      DBD               at 1 range 3 .. 3;
+      Reserved_1_7_4    at 1 range 4 .. 7;
+      PAGE_CODE         at 2 range 0 .. 5;
+      PC                at 2 range 6 .. 7;
+      SUBPAGE_CODE      at 3 range 0 .. 7;
+      ALLOCATION_LENGTH at 4 range 0 .. 7;
+      CONTROL           at 5 range 0 .. 7;
+   end record;
+
    ------------------------
-   --  REPORT_LUNS [A0]  --
+   --  REPORT LUNS [A0]  --
    ------------------------
 
    type REPORT_LUNS_CDB is record
