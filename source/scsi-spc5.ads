@@ -12,7 +12,7 @@ package SCSI.SPC5 with Pure is
 
    INQUIRY         : constant SCSI.SAM5.OPERATION_CODE := 16#12#;  --  18
    --  MODE_SENSE_6_Operation_Code     : constant Operation_Code := 16#1A#;  --  26
-   --  REPORT_LUNS_Operation_Code      : constant Operation_Code := 16#A0#;  --  160
+   REPORT_LUNS     : constant SCSI.SAM5.OPERATION_CODE := 16#A0#;  --  160
    --  REQUEST_SENSE_Operation_Code    : constant Operation_Code := 16#03#;  --  3
    TEST_UNIT_READY : constant SCSI.SAM5.OPERATION_CODE := 16#00#;  --  0
 

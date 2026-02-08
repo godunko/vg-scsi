@@ -11,6 +11,7 @@ with A0B.Types.Big_Endian;
 package SCSI.SPC5.CDB with Pure is
 
    INQUIRY_CDB_Length         : constant := 6;
+   REPORT_LUNS_CDB_Length     : constant := 12;
    TEST_UNIT_READY_CDB_Length : constant := 6;
 
    --  INQUIRY (12)
@@ -28,13 +29,41 @@ package SCSI.SPC5.CDB with Pure is
           Bit_Order => System.Low_Order_First;
 
    for INQUIRY_CDB use record
-      OPERATION_CODE            at 0 range 0 .. 7;
-      EVPD                      at 1 range 0 .. 0;
-      Obsolete_1_1_1            at 1 range 1 .. 1;
-      Reserved_1_7_2            at 1 range 2 .. 7;
-      PAGE_CODE                 at 2 range 0 .. 7;
-      ALLOCATION_LENGTH         at 3 range 0 .. 15;
-      CONTROL                   at 5 range 0 .. 7;
+      OPERATION_CODE    at 0 range 0 .. 7;
+      EVPD              at 1 range 0 .. 0;
+      Obsolete_1_1_1    at 1 range 1 .. 1;
+      Reserved_1_7_2    at 1 range 2 .. 7;
+      PAGE_CODE         at 2 range 0 .. 7;
+      ALLOCATION_LENGTH at 3 range 0 .. 15;
+      CONTROL           at 5 range 0 .. 7;
+   end record;
+
+   --  REPORT_LUNS (A0)
+
+   type REPORT_LUNS_CDB is record
+      OPERATION_CODE    : SCSI.SAM5.OPERATION_CODE := SCSI.SPC5.REPORT_LUNS;
+      Reserved_1        : A0B.Types.Reserved_8     := A0B.Types.Zero;
+      SELECT_REPORT     : A0B.Types.Unsigned_8;
+      Reserved_3        : A0B.Types.Reserved_8     := A0B.Types.Zero;
+      Reserved_4        : A0B.Types.Reserved_8     := A0B.Types.Zero;
+      Reserved_5        : A0B.Types.Reserved_8     := A0B.Types.Zero;
+      ALLOCATION_LENGTH : A0B.Types.Big_Endian.Unsigned_32;
+      Reserved_10       : A0B.Types.Reserved_8     := A0B.Types.Zero;
+      CONTROL           : SCSI.SAM5.CONTROL;
+   end record
+     with Size      => REPORT_LUNS_CDB_Length * A0B.Types.Unsigned_8'Size,
+          Bit_Order => System.Low_Order_First;
+
+   for REPORT_LUNS_CDB use record
+      OPERATION_CODE    at 0 range 0 .. 7;
+      Reserved_1        at 1 range 0 .. 7;
+      SELECT_REPORT     at 2 range 0 .. 7;
+      Reserved_3        at 3 range 0 .. 7;
+      Reserved_4        at 4 range 0 .. 7;
+      Reserved_5        at 5 range 0 .. 7;
+      ALLOCATION_LENGTH at 6 range 0 .. 31;
+      Reserved_10       at 10 range 0 .. 7;
+      CONTROL           at 11 range 0 .. 7;
    end record;
 
    --  TEST UNIT READY (00)

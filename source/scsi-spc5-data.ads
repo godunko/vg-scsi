@@ -15,13 +15,18 @@ package SCSI.SPC5.Data with Pure is
 
    use type A0B.Types.Unsigned_8;
 
-   INQUIRY_Data_Length : constant := 96;
+   INQUIRY_Data_Length            : constant := 96;
+   REPORT_LUNS_Data_Header_Length : constant := 8;
 
    type Vendor_Information_Field is array (0 .. 7) of Character;
 
    type Product_Identification_Field is array (0 .. 15) of Character;
 
    type Product_Revision_Level_Field is array (0 .. 3) of Character;
+
+   ---------------
+   --  INQUIRY  --
+   ---------------
 
    type INQUIRY_Data is record
       PERIPHERAL_QUALIFIER      : A0B.Types.Unsigned_3;
@@ -75,7 +80,7 @@ package SCSI.SPC5.Data with Pure is
       Reserved_74_95            : A0B.Types.Arrays.Unsigned_8_Array (74 .. 95) :=
         [others => 16#00#];
    end record
-     with Size      => INQUIRY_Data_Length * A0B.Types.Unsigned_8'Size,
+     with Size      => INQUIRY_Data_Length * Byte_Size,
           Bit_Order => System.Low_Order_First;
 
    for INQUIRY_Data use record
@@ -126,6 +131,28 @@ package SCSI.SPC5.Data with Pure is
       VERSION_DESCRIPTOR_7      at 70 range 0 .. 15;
       VERSION_DESCRIPTOR_8      at 72 range 0 .. 15;
       Reserved_74_95            at 74 range 0 .. 175;
+   end record;
+
+   -------------------
+   --  REPORT LUNS  --
+   -------------------
+
+   type REPORT_LUNS_Data_Header is record
+      LUN_LIST_LENGTH : A0B.Types.Big_Endian.Unsigned_32;
+      Reserved_4      : A0B.Types.Reserved_8 := A0B.Types.Zero;
+      Reserved_5      : A0B.Types.Reserved_8 := A0B.Types.Zero;
+      Reserved_6      : A0B.Types.Reserved_8 := A0B.Types.Zero;
+      Reserved_7      : A0B.Types.Reserved_8 := A0B.Types.Zero;
+   end record
+     with Size      => REPORT_LUNS_Data_Header_Length * Byte_Size,
+          Bit_Order => System.Low_Order_First;
+
+   for REPORT_LUNS_Data_Header use record
+      LUN_LIST_LENGTH at 0 range 0 .. 31;
+      Reserved_4      at 4 range 0 .. 7;
+      Reserved_5      at 5 range 0 .. 7;
+      Reserved_6      at 6 range 0 .. 7;
+      Reserved_7      at 7 range 0 .. 7;
    end record;
 
 end SCSI.SPC5.Data;
