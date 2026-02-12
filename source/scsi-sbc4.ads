@@ -5,6 +5,7 @@
 --  SCSI Block Commands - 4 (SBC-4)
 
 with SCSI.SAM5;
+with SCSI.SPC5;
 
 package SCSI.SBC4 with Pure is
 
@@ -14,5 +15,7 @@ package SCSI.SBC4 with Pure is
    --  WRITE_10_Operation_Code         : constant Operation_Code := 16#2A#;  --  42
 
    READ_CAPACITY_16 : constant SCSI.SAM5.SERVICE_ACTION := 16#10#;  --  16
+
+   Caching : constant SCSI.SPC5.Mode_Page_Code := 16#08#;  --  08
 
 end SCSI.SBC4;
