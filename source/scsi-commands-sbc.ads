@@ -10,6 +10,17 @@ with SCSI.SAM5;
 
 package SCSI.Commands.SBC with Pure is
 
+   type READ_Command_Descriptor is record
+      GROUP_NUMBER          : A0B.Types.Unsigned_6;
+      LOGICAL_BLOCK_ADDRESS : A0B.Types.Unsigned_64;
+      TRANSFER_LENGTH       : A0B.Types.Unsigned_32;
+      RDPROTECT             : A0B.Types.Unsigned_3;
+      DPO                   : Boolean;
+      FUA                   : Boolean;
+      RARC                  : Boolean;
+      DLD                   : A0B.Types.Unsigned_3;
+   end record;
+
    type READ_CAPACITY_Variant is (READ_CAPACITY_10, READ_CAPACITY_16);
 
    type READ_CAPACITY_Command_Descriptor is record
