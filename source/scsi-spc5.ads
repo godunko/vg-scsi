@@ -31,8 +31,8 @@ package SCSI.SPC5 with Pure is
 
    NO_SENSE                       : constant SCSI.SAM5.Sense_Data :=
      (16#0#, 16#00#, 16#00#);
-   --  INVALID_COMMAND_OPERATION_CODE : constant SCSI.SAM5.Sense_Data :=
-   --    (16#5#, 16#20#, 16#00#);
+   INVALID_COMMAND_OPERATION_CODE : constant SCSI.SAM5.Sense_Data :=
+     (16#5#, 16#20#, 16#00#);
    INVALID_FIELD_IN_CDB           : constant SCSI.SAM5.Sense_Data :=
      (16#5#, 16#24#, 16#00#);
    --  OVERLAPPED_COMMAND_ATTEMPTED   : constant SCSI.SAM5.Sense_Data :=
