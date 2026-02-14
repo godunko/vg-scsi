@@ -11,8 +11,8 @@ package SCSI.SBC4 with Pure is
 
    --  FORMAT_UNIT_Operation_Code      : constant Operation_Code := 16#04#;  --  4
    READ_6           : constant SCSI.SAM5.OPERATION_CODE := 16#08#;  --  8
+   READ_10          : constant SCSI.SAM5.OPERATION_CODE := 16#28#;  --  40
    --  READ_CAPACITY_10_Operation_Code : constant Operation_Code := 16#25#;  --  37
-   --  READ_10_Operation_Code          : constant Operation_Code := 16#28#;  --  40
    --  WRITE_10_Operation_Code         : constant Operation_Code := 16#2A#;  --  42
 
    READ_CAPACITY_16 : constant SCSI.SAM5.SERVICE_ACTION := 16#10#;  --  16

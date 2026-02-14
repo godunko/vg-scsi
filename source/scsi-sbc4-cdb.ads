@@ -13,6 +13,7 @@ with SCSI.SPC5;
 package SCSI.SBC4.CDB with Pure is
 
    READ_6_CDB_Length           : constant := 6;
+   READ_10_CDB_Length          : constant := 10;
    READ_CAPACITY_16_CDB_Length : constant := 16;
 
    ------------------
@@ -20,7 +21,7 @@ package SCSI.SBC4.CDB with Pure is
    ------------------
 
    type READ_6_CDB is record
-      OPERATION_CODE                 : SCSI.SAM5.OPERATION_CODE  :=
+      OPERATION_CODE                 : SCSI.SAM5.OPERATION_CODE :=
         SCSI.SBC4.READ_6;
       Reserved_LOGICAL_BLOCK_ADDRESS : A0B.Types.Reserved_24;
       --  Can't be represented
@@ -48,9 +49,45 @@ package SCSI.SBC4.CDB with Pure is
    --  Returns value of `Reserved_1_7_5` component of READ(6) command
    --  descriptor.
 
-   --------------------------------
-   -- READ CAPACITY (16) [9E:10] --
-   --------------------------------
+   -------------------
+   -- READ(10) [28] --
+   -------------------
+
+   type READ_10_CDB is record
+      OPERATION_CODE        : SCSI.SAM5.OPERATION_CODE := SCSI.SBC4.READ_10;
+      RDPROTECT             : A0B.Types.Unsigned_3;
+      DPO                   : Boolean;
+      FUA                   : Boolean;
+      RARC                  : Boolean;
+      Obsolete_1_1_1        : A0B.Types.Reserved_1     := A0B.Types.Zero;
+      Obsolete_1_0_0        : A0B.Types.Reserved_1     := A0B.Types.Zero;
+      LOGICAL_BLOCK_ADDRESS : A0B.Types.Big_Endian.Unsigned_32;
+      Reserved_6_7_6        : A0B.Types.Reserved_2     := A0B.Types.Zero;
+      GROUP_NUMBER          : A0B.Types.Unsigned_6;
+      TRANSFER_LENGTH       : A0B.Types.Big_Endian.Unsigned_16;
+      CONTROL               : SCSI.SAM5.CONTROL;
+   end record
+     with Size      => READ_10_CDB_Length * Byte_Size,
+          Bit_Order => System.Low_Order_First;
+
+   for READ_10_CDB use record
+      OPERATION_CODE        at 0 range 0 .. 7;
+      Obsolete_1_0_0        at 1 range 0 .. 0;
+      Obsolete_1_1_1        at 1 range 1 .. 1;
+      RARC                  at 1 range 2 .. 2;
+      FUA                   at 1 range 3 .. 3;
+      DPO                   at 1 range 4 .. 4;
+      RDPROTECT             at 1 range 5 .. 7;
+      LOGICAL_BLOCK_ADDRESS at 2 range 0 .. 31;
+      GROUP_NUMBER          at 6 range 0 .. 5;
+      Reserved_6_7_6        at 6 range 6 .. 7;
+      TRANSFER_LENGTH       at 7 range 0 .. 15;
+      CONTROL               at 9 range 0 .. 7;
+   end record;
+
+   -------------------------------
+   -- READ CAPACITY(16) [9E:10] --
+   -------------------------------
 
    type READ_CAPACITY_16_CDB is record
       OPERATION_CODE    : SCSI.SAM5.OPERATION_CODE  :=
