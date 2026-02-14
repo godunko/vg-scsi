@@ -15,6 +15,7 @@ package SCSI.SBC4.CDB with Pure is
    READ_6_CDB_Length           : constant := 6;
    READ_10_CDB_Length          : constant := 10;
    READ_CAPACITY_16_CDB_Length : constant := 16;
+   WRITE_6_CDB_Length          : constant := 6;
 
    ------------------
    -- READ(6) [08] --
@@ -128,5 +129,38 @@ package SCSI.SBC4.CDB with Pure is
       Reserved_14_7_1   at 14 range 1 .. 7;
       CONTROL           at 15 range 0 .. 7;
    end record;
+
+   -------------------
+   -- WRITE(6) [0A] --
+   -------------------
+
+   type WRITE_6_CDB is record
+      OPERATION_CODE                 : SCSI.SAM5.OPERATION_CODE :=
+        SCSI.SBC4.WRITE_6;
+      Reserved_LOGICAL_BLOCK_ADDRESS : A0B.Types.Reserved_24;
+      --  Can't be represented
+      --  Reserved_1_7_5        : A0B.Types.Reserved_3;
+      --  LOGICAL BLOCK ADDRESS : A0B.Types.Big_Endian.Unsugned_21;
+      TRANSFER_LENGTH                : A0B.Types.Unsigned_8;
+      CONTROL                        : SCSI.SAM5.CONTROL;
+   end record
+     with Size      => WRITE_6_CDB_Length * Byte_Size,
+          Bit_Order => System.Low_Order_First;
+
+   for WRITE_6_CDB use record
+      OPERATION_CODE                 at 0 range 0 .. 7;
+      Reserved_LOGICAL_BLOCK_ADDRESS at 1 range 0 .. 23;
+      TRANSFER_LENGTH                at 4 range 0 .. 7;
+      CONTROL                        at 5 range 0 .. 7;
+   end record;
+
+   function LOGICAL_BLOCK_ADDRESS
+     (CDB : WRITE_6_CDB) return A0B.Types.Unsigned_64 with Inline;
+   --  Returns value of `LOGICAL BLOCK ADDRESS` component of READ(6) command
+   --  descriptor.
+
+   function Reserved_1_7_5 (CDB : WRITE_6_CDB) return A0B.Types.Reserved_3;
+   --  Returns value of `Reserved_1_7_5` component of READ(6) command
+   --  descriptor.
 
 end SCSI.SBC4.CDB;
