@@ -29,4 +29,14 @@ package SCSI.Commands.SBC with Pure is
       SERVICE_ACTION    : SCSI.SAM5.SERVICE_ACTION;
    end record;
 
+   type WRITE_Command_Descriptor is record
+      GROUP_NUMBER          : A0B.Types.Unsigned_6;
+      LOGICAL_BLOCK_ADDRESS : A0B.Types.Unsigned_64;
+      TRANSFER_LENGTH       : A0B.Types.Unsigned_32;
+      WRPROTECT             : A0B.Types.Unsigned_3;
+      DPO                   : Boolean;
+      FUA                   : Boolean;
+      DLD                   : A0B.Types.Unsigned_3;
+   end record;
+
 end SCSI.Commands.SBC;
