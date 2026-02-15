@@ -16,6 +16,7 @@ package SCSI.SBC4.CDB with Pure is
    READ_10_CDB_Length          : constant := 10;
    READ_CAPACITY_16_CDB_Length : constant := 16;
    WRITE_6_CDB_Length          : constant := 6;
+   WRITE_10_CDB_Length         : constant := 10;
 
    ------------------
    -- READ(6) [08] --
@@ -162,5 +163,42 @@ package SCSI.SBC4.CDB with Pure is
    function Reserved_1_7_5 (CDB : WRITE_6_CDB) return A0B.Types.Reserved_3;
    --  Returns value of `Reserved_1_7_5` component of READ(6) command
    --  descriptor.
+
+   --------------------
+   -- WRITE(10) [2A] --
+   --------------------
+
+   type WRITE_10_CDB is record
+      OPERATION_CODE        : SCSI.SAM5.OPERATION_CODE :=
+        SCSI.SBC4.WRITE_10;
+      WRPROTECT             : A0B.Types.Unsigned_3;
+      DPO                   : Boolean;
+      FUA                   : Boolean;
+      Reserved_1_2_2        : A0B.Types.Reserved_1 := A0B.Types.Zero;
+      Obsolete_1_1_1        : A0B.Types.Reserved_1 := A0B.Types.Zero;
+      Obsolete_1_0_0        : A0B.Types.Reserved_1 := A0B.Types.Zero;
+      LOGICAL_BLOCK_ADDRESS : A0B.Types.Big_Endian.Unsigned_32;
+      Reserved_6_7_6        : A0B.Types.Reserved_2 := A0B.Types.Zero;
+      GROUP_NUMBER          : A0B.Types.Unsigned_6;
+      TRANSFER_LENGTH       : A0B.Types.Big_Endian.Unsigned_16;
+      CONTROL               : A0B.Types.Reserved_8;
+   end record
+     with Size      => WRITE_10_CDB_Length * Byte_Size,
+          Bit_Order => System.Low_Order_First;
+
+   for WRITE_10_CDB use record
+      OPERATION_CODE        at 0 range 0 .. 7;
+      Obsolete_1_0_0        at 1 range 0 .. 0;
+      Obsolete_1_1_1        at 1 range 1 .. 1;
+      Reserved_1_2_2        at 1 range 2 .. 2;
+      FUA                   at 1 range 3 .. 3;
+      DPO                   at 1 range 4 .. 4;
+      WRPROTECT             at 1 range 5 .. 7;
+      LOGICAL_BLOCK_ADDRESS at 2 range 0 .. 31;
+      GROUP_NUMBER          at 6 range 0 .. 5;
+      Reserved_6_7_6        at 6 range 6 .. 7;
+      TRANSFER_LENGTH       at 7 range 0 .. 15;
+      CONTROL               at 9 range 0 .. 7;
+   end record;
 
 end SCSI.SBC4.CDB;
