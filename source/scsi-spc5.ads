@@ -38,6 +38,9 @@ package SCSI.SPC5 with Pure is
    --  OVERLAPPED_COMMAND_ATTEMPTED   : constant SCSI.SAM5.Sense_Data :=
    --    (16#B#, 16#4E#, 16#00#);
 
+   CDB_10_CONTROL_Byte : constant := 9;
+   --  Byte number of the CONTROL field for CDB of 10-byte commands.
+
    --  --  REQUEST SENSE (03)
    --
    --  type REQUEST_SENSE_Command_Block is record

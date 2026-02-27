@@ -64,7 +64,8 @@ package SCSI.SBC4.CDB with Pure is
       Obsolete_1_1_1        : A0B.Types.Reserved_1     := A0B.Types.Zero;
       Obsolete_1_0_0        : A0B.Types.Reserved_1     := A0B.Types.Zero;
       LOGICAL_BLOCK_ADDRESS : A0B.Types.Big_Endian.Unsigned_32;
-      Reserved_6_7_6        : A0B.Types.Reserved_2     := A0B.Types.Zero;
+      Reserved_6_7_7        : A0B.Types.Reserved_1     := A0B.Types.Zero;
+      Reserved_6_6_6        : A0B.Types.Reserved_1     := A0B.Types.Zero;
       GROUP_NUMBER          : A0B.Types.Unsigned_6;
       TRANSFER_LENGTH       : A0B.Types.Big_Endian.Unsigned_16;
       CONTROL               : SCSI.SAM5.CONTROL;
@@ -82,7 +83,8 @@ package SCSI.SBC4.CDB with Pure is
       RDPROTECT             at 1 range 5 .. 7;
       LOGICAL_BLOCK_ADDRESS at 2 range 0 .. 31;
       GROUP_NUMBER          at 6 range 0 .. 5;
-      Reserved_6_7_6        at 6 range 6 .. 7;
+      Reserved_6_6_6        at 6 range 6 .. 6;
+      Reserved_6_7_7        at 6 range 7 .. 7;
       TRANSFER_LENGTH       at 7 range 0 .. 15;
       CONTROL               at 9 range 0 .. 7;
    end record;
