@@ -34,7 +34,9 @@ package SCSI.SAM5 with Pure is
 
    type CONTROL is record
       VS_0_7_6       : A0B.Types.Reserved_2 := A0B.Types.Zero;
-      Reserved_0_5_3 : A0B.Types.Reserved_3 := A0B.Types.Zero;
+      Reserved_0_5_5 : A0B.Types.Reserved_1 := A0B.Types.Zero;
+      Reserved_0_4_4 : A0B.Types.Reserved_1 := A0B.Types.Zero;
+      Reserved_0_3_3 : A0B.Types.Reserved_1 := A0B.Types.Zero;
       NACA           : Boolean;
       Obsolete_0_1_1 : A0B.Types.Reserved_1 := A0B.Types.Zero;
       Obsolete_0_0_0 : A0B.Types.Reserved_1 := A0B.Types.Zero;
@@ -45,7 +47,9 @@ package SCSI.SAM5 with Pure is
       Obsolete_0_0_0 at 0 range 0 .. 0;
       Obsolete_0_1_1 at 0 range 1 .. 1;
       NACA           at 0 range 2 .. 2;
-      Reserved_0_5_3 at 0 range 3 .. 5;
+      Reserved_0_3_3 at 0 range 3 .. 3;
+      Reserved_0_4_4 at 0 range 4 .. 4;
+      Reserved_0_5_5 at 0 range 5 .. 5;
       VS_0_7_6       at 0 range 6 .. 7;
    end record;
 
