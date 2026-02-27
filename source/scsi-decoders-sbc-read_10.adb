@@ -2,7 +2,6 @@
 --  Copyright (C) 2026, Vadim Godunko <vgodunko@gmail.com>
 --
 
-with SCSI.SAM5;
 with SCSI.SBC4.CDB;
 with SCSI.SPC5;
 
