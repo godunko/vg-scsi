@@ -27,7 +27,9 @@ package SCSI.SBC4.CDB with Pure is
         SCSI.SBC4.READ_6;
       Reserved_LOGICAL_BLOCK_ADDRESS : A0B.Types.Reserved_24;
       --  Can't be represented
-      --  Reserved_1_7_5        : A0B.Types.Reserved_3;
+      --  Reserved_1_7_7        : A0B.Types.Reserved_1;
+      --  Reserved_1_6_6        : A0B.Types.Reserved_1;
+      --  Reserved_1_5_5        : A0B.Types.Reserved_1;
       --  LOGICAL BLOCK ADDRESS : A0B.Types.Big_Endian.Unsugned_21;
       TRANSFER_LENGTH                : A0B.Types.Unsigned_8;
       CONTROL                        : SCSI.SAM5.CONTROL;
@@ -47,8 +49,16 @@ package SCSI.SBC4.CDB with Pure is
    --  Returns value of `LOGICAL BLOCK ADDRESS` component of READ(6) command
    --  descriptor.
 
-   function Reserved_1_7_5 (CDB : READ_6_CDB) return A0B.Types.Reserved_3;
-   --  Returns value of `Reserved_1_7_5` component of READ(6) command
+   function Reserved_1_7_7 (CDB : READ_6_CDB) return A0B.Types.Reserved_1;
+   --  Returns value of `Reserved_1_7_7` component of READ(6) command
+   --  descriptor.
+
+   function Reserved_1_6_6 (CDB : READ_6_CDB) return A0B.Types.Reserved_1;
+   --  Returns value of `Reserved_1_6_6` component of READ(6) command
+   --  descriptor.
+
+   function Reserved_1_5_5 (CDB : READ_6_CDB) return A0B.Types.Reserved_1;
+   --  Returns value of `Reserved_1_5_5` component of READ(6) command
    --  descriptor.
 
    -------------------
