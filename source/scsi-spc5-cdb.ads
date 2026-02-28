@@ -22,7 +22,12 @@ package SCSI.SPC5.CDB with Pure is
 
    type INQUIRY_CDB is record
       OPERATION_CODE    : SCSI.SAM5.OPERATION_CODE := SCSI.SPC5.INQUIRY;
-      Reserved_1_7_2    : A0B.Types.Reserved_6     := A0B.Types.Zero;
+      Reserved_1_7_7    : A0B.Types.Reserved_1     := A0B.Types.Zero;
+      Reserved_1_6_6    : A0B.Types.Reserved_1     := A0B.Types.Zero;
+      Reserved_1_5_5    : A0B.Types.Reserved_1     := A0B.Types.Zero;
+      Reserved_1_4_4    : A0B.Types.Reserved_1     := A0B.Types.Zero;
+      Reserved_1_3_3    : A0B.Types.Reserved_1     := A0B.Types.Zero;
+      Reserved_1_2_2    : A0B.Types.Reserved_1     := A0B.Types.Zero;
       Obsolete_1_1_1    : A0B.Types.Reserved_1     := A0B.Types.Zero;
       EVPD              : Boolean                  := False;
       PAGE_CODE         : SCSI.SPC5.VPD_Page_Code  := 0;
@@ -36,7 +41,12 @@ package SCSI.SPC5.CDB with Pure is
       OPERATION_CODE    at 0 range 0 .. 7;
       EVPD              at 1 range 0 .. 0;
       Obsolete_1_1_1    at 1 range 1 .. 1;
-      Reserved_1_7_2    at 1 range 2 .. 7;
+      Reserved_1_2_2    at 1 range 2 .. 2;
+      Reserved_1_3_3    at 1 range 3 .. 3;
+      Reserved_1_4_4    at 1 range 4 .. 4;
+      Reserved_1_5_5    at 1 range 5 .. 5;
+      Reserved_1_6_6    at 1 range 6 .. 6;
+      Reserved_1_7_7    at 1 range 7 .. 7;
       PAGE_CODE         at 2 range 0 .. 7;
       ALLOCATION_LENGTH at 3 range 0 .. 15;
       CONTROL           at 5 range 0 .. 7;
