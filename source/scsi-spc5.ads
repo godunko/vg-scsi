@@ -40,7 +40,8 @@ package SCSI.SPC5 with Pure is
 
    CDB_6_CONTROL_Byte  : constant := 5;
    CDB_10_CONTROL_Byte : constant := 9;
-   --  Byte number of the CONTROL field for CDB of 10-byte commands.
+   CDB_12_CONTROL_Byte : constant := 11;
+   --  Byte number of the CONTROL field for CDB of 6/10/12-byte commands.
 
    --  --  REQUEST SENSE (03)
    --

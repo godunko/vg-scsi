@@ -69,7 +69,7 @@ package body SCSI.Decoders.SPC.INQUIRY is
          end if;
 
          if not Self.Check_CONTROL
-           (CDB.CONTROL, SCSI.SPC5.CDB_10_CONTROL_Byte)
+           (CDB.CONTROL, SCSI.SPC5.CDB_6_CONTROL_Byte)
          then
             return False;
          end if;
