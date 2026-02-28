@@ -2,7 +2,7 @@
 --  Copyright (C) 2026, Vadim Godunko <vgodunko@gmail.com>
 --
 
-with SCSI.SBC4.CDB;
+with SCSI.SBC3.CDB;
 with SCSI.SPC5;
 
 package body SCSI.Decoders.SBC.READ_6 with Pure is
@@ -23,27 +23,27 @@ package body SCSI.Decoders.SBC.READ_6 with Pure is
 
    begin
       if not Self.Check_CDB_Length
-        (SCSI.SBC4.CDB.READ_6_CDB_Length, CDB_Storage)
+        (SCSI.SBC3.CDB.READ_6_CDB_Length, CDB_Storage)
       then
          return False;
       end if;
 
       declare
-         CDB : SCSI.SBC4.CDB.READ_6_CDB
+         CDB : SCSI.SBC3.CDB.READ_6_CDB
            with Import, Address => CDB_Storage'Address;
 
       begin
-         pragma Assert (CDB.OPERATION_CODE = SCSI.SBC4.READ_6);
+         pragma Assert (CDB.OPERATION_CODE = SCSI.SBC3.READ_6);
 
-         if SCSI.SBC4.CDB.Reserved_1_7_7 (CDB) /= A0B.Types.Zero then
+         if SCSI.SBC3.CDB.Reserved_1_7_7 (CDB) /= A0B.Types.Zero then
             return Self.Fail_INVALID_FIELD_IN_CDB (1, 7);
          end if;
 
-         if SCSI.SBC4.CDB.Reserved_1_6_6 (CDB) /= A0B.Types.Zero then
+         if SCSI.SBC3.CDB.Reserved_1_6_6 (CDB) /= A0B.Types.Zero then
             return Self.Fail_INVALID_FIELD_IN_CDB (1, 6);
          end if;
 
-         if SCSI.SBC4.CDB.Reserved_1_5_5 (CDB) /= A0B.Types.Zero then
+         if SCSI.SBC3.CDB.Reserved_1_5_5 (CDB) /= A0B.Types.Zero then
             return Self.Fail_INVALID_FIELD_IN_CDB (1, 5);
          end if;
 
@@ -55,7 +55,7 @@ package body SCSI.Decoders.SBC.READ_6 with Pure is
 
          Descriptor :=
            (GROUP_NUMBER          => 0,      --  Not present in READ(6)
-            LOGICAL_BLOCK_ADDRESS => SCSI.SBC4.CDB.LOGICAL_BLOCK_ADDRESS (CDB),
+            LOGICAL_BLOCK_ADDRESS => SCSI.SBC3.CDB.LOGICAL_BLOCK_ADDRESS (CDB),
             TRANSFER_LENGTH       =>
               (if CDB.TRANSFER_LENGTH = 0
                  then 256

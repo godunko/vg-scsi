@@ -4,7 +4,9 @@
 
 with Ada.Unchecked_Conversion;
 
-package body SCSI.SBC4.CDB with Pure is
+with A0B.Types.Big_Endian;
+
+package body SCSI.SBC3.CDB with Pure is
 
    ---------------------------
    -- LOGICAL_BLOCK_ADDRESS --
@@ -184,4 +186,4 @@ package body SCSI.SBC4.CDB with Pure is
                 (A0B.Types.Unsigned_32 (Component.Value), 23)));
    end Reserved_1_7_7;
 
-end SCSI.SBC4.CDB;
+end SCSI.SBC3.CDB;
