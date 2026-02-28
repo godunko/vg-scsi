@@ -58,9 +58,14 @@ package SCSI.SPC5.CDB with Pure is
 
    type MODE_SENSE_6_CDB is record
       OPERATION_CODE    : SCSI.SAM5.OPERATION_CODE := SCSI.SPC5.MODE_SENSE_6;
-      Reserved_1_7_4    : A0B.Types.Reserved_4 := A0B.Types.Zero;
+      Reserved_1_7_7    : A0B.Types.Reserved_1 := A0B.Types.Zero;
+      Reserved_1_6_6    : A0B.Types.Reserved_1 := A0B.Types.Zero;
+      Reserved_1_5_5    : A0B.Types.Reserved_1 := A0B.Types.Zero;
+      Reserved_1_4_4    : A0B.Types.Reserved_1 := A0B.Types.Zero;
       DBD               : Boolean              := False;
-      Reserved_1_0_2    : A0B.Types.Reserved_3;
+      Reserved_1_2_2    : A0B.Types.Reserved_1 := A0B.Types.Zero;
+      Reserved_1_1_1    : A0B.Types.Reserved_1 := A0B.Types.Zero;
+      Reserved_1_0_0    : A0B.Types.Reserved_1 := A0B.Types.Zero;
       PC                : A0B.Types.Unsigned_2;
       PAGE_CODE         : SCSI.SPC5.Mode_Page_Code;
       SUBPAGE_CODE      : A0B.Types.Unsigned_8;
@@ -72,9 +77,14 @@ package SCSI.SPC5.CDB with Pure is
 
    for MODE_SENSE_6_CDB use record
       OPERATION_CODE    at 0 range 0 .. 7;
-      Reserved_1_0_2    at 1 range 0 .. 2;
+      Reserved_1_0_0    at 1 range 0 .. 0;
+      Reserved_1_1_1    at 1 range 1 .. 1;
+      Reserved_1_2_2    at 1 range 2 .. 2;
       DBD               at 1 range 3 .. 3;
-      Reserved_1_7_4    at 1 range 4 .. 7;
+      Reserved_1_4_4    at 1 range 4 .. 4;
+      Reserved_1_5_5    at 1 range 5 .. 5;
+      Reserved_1_6_6    at 1 range 6 .. 6;
+      Reserved_1_7_7    at 1 range 7 .. 7;
       PAGE_CODE         at 2 range 0 .. 5;
       PC                at 2 range 6 .. 7;
       SUBPAGE_CODE      at 3 range 0 .. 7;
