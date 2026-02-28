@@ -17,6 +17,7 @@ package body SCSI.Decoders.SPC.INQUIRY is
       return Boolean
    is
       use type A0B.Types.Reserved_1;
+      use type SCSI.SAM5.OPERATION_CODE;
       use type SCSI.SPC5.VPD_Page_Code;
 
    begin
@@ -31,6 +32,8 @@ package body SCSI.Decoders.SPC.INQUIRY is
            with Import, Address => CDB_Storage'Address;
 
       begin
+         pragma Assert (CDB.OPERATION_CODE = SCSI.SPC5.INQUIRY);
+
          if CDB.Reserved_1_7_7 /= A0B.Types.Zero then
             return Self.Fail_INVALID_FIELD_IN_CDB (1, 7);
          end if;
