@@ -34,20 +34,20 @@ package body SCSI.Decoders.SBC.READ_10 with Pure is
       begin
          pragma Assert (CDB.OPERATION_CODE = SCSI.SBC4.READ_10);
 
-         if CDB.Reserved_6_7_7 /= A0B.Types.Zero then
-            return Self.Fail_INVALID_FIELD_IN_CDB (6, 7);
-         end if;
-
-         if CDB.Reserved_6_6_6 /= A0B.Types.Zero then
-            return Self.Fail_INVALID_FIELD_IN_CDB (6, 6);
-         end if;
-
          if CDB.Obsolete_1_1_1 /= A0B.Types.Zero then
             return Self.Fail_INVALID_FIELD_IN_CDB (1, 1);
          end if;
 
          if CDB.Obsolete_1_0_0 /= A0B.Types.Zero then
             return Self.Fail_INVALID_FIELD_IN_CDB (1, 0);
+         end if;
+
+         if CDB.Reserved_6_7_7 /= A0B.Types.Zero then
+            return Self.Fail_INVALID_FIELD_IN_CDB (6, 7);
+         end if;
+
+         if CDB.Reserved_6_6_6 /= A0B.Types.Zero then
+            return Self.Fail_INVALID_FIELD_IN_CDB (6, 6);
          end if;
 
          if not Self.Check_CONTROL
