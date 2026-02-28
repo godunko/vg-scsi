@@ -5,7 +5,7 @@
 with SCSI.SBC4.CDB;
 with SCSI.SPC5;
 
-package body SCSI.Decoders.SBC.WRITE_10 with Pure is
+package body SCSI.Decoders.SBC.WRITE_10 is
 
    ---------------------
    -- Decode_WRITE_10 --

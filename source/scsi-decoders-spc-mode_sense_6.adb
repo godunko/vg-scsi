@@ -4,7 +4,7 @@
 
 with SCSI.SPC5.CDB;
 
-package body SCSI.Decoders.SPC.MODE_SENSE_6 with Pure is
+package body SCSI.Decoders.SPC.MODE_SENSE_6 is
 
    -------------------------
    -- Decode_MODE_SENSE_6 --
