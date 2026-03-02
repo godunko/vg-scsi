@@ -6,7 +6,7 @@ with System;
 
 with A0B.Types;
 
-package SCSI.Buffers is
+package SCSI.Buffers with Pure is
 
    type Data_Buffer is tagged limited private;
 
