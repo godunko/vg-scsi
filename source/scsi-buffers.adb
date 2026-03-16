@@ -15,6 +15,27 @@ package body SCSI.Buffers is
       return Self.Address;
    end Address;
 
+   -----------
+   -- Align --
+   -----------
+
+   procedure Align
+     (Self : in out Data_Buffer'Class;
+      To   : A0B.Types.Unsigned_32)
+   is
+      use type A0B.Types.Unsigned_32;
+
+      Aligned_Length : constant A0B.Types.Unsigned_32 :=
+        ((Self.Length + To - 1) / To) * To;
+
+   begin
+      if Self.Capacity < Aligned_Length then
+         raise Constraint_Error;
+      end if;
+
+      Self.Length := Aligned_Length;
+   end Align;
+
    --------------
    -- Allocate --
    --------------
@@ -56,6 +77,15 @@ package body SCSI.Buffers is
    begin
       return Self.Allocation;
    end Allocation_Length;
+
+   --------------
+   -- Capacity --
+   --------------
+
+   function Capacity (Self : Data_Buffer'Class) return A0B.Types.Unsigned_32 is
+   begin
+      return Self.Capacity;
+   end Capacity;
 
    ----------------
    -- Initialize --
@@ -106,5 +136,23 @@ package body SCSI.Buffers is
 
       Self.Allocation := To;
    end Set_Allocation_Length;
+
+   ----------------
+   -- Set_Length --
+   ----------------
+
+   procedure Set_Length
+     (Self : in out Data_Buffer'Class;
+      To   : A0B.Types.Unsigned_32)
+   is
+      use type A0B.Types.Unsigned_32;
+
+   begin
+      if Self.Capacity < To then
+         raise Constraint_Error;
+      end if;
+
+      Self.Length := To;
+   end Set_Length;
 
 end SCSI.Buffers;

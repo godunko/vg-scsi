@@ -19,6 +19,8 @@ package SCSI.Buffers with Pure is
 
    function Address (Self : Data_Buffer'Class) return System.Address;
 
+   function Capacity (Self : Data_Buffer'Class) return A0B.Types.Unsigned_32;
+
    function Allocation_Length
      (Self : Data_Buffer'CLass) return A0B.Types.Unsigned_32;
 
@@ -28,10 +30,18 @@ package SCSI.Buffers with Pure is
      (Self : in out Data_Buffer'Class;
       To   : A0B.Types.Unsigned_32);
 
+   procedure Set_Length
+     (Self : in out Data_Buffer'Class;
+      To   : A0B.Types.Unsigned_32);
+
    function Allocate
      (Self    : in out Data_Buffer'Class;
       Length  : A0B.Types.Unsigned_32;
       Address : out System.Address) return Boolean;
+
+   procedure Align
+     (Self : in out Data_Buffer'Class;
+      To   : A0B.Types.Unsigned_32);
 
 private
 
