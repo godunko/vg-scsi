@@ -78,6 +78,39 @@ package body A0B.SCSI.Buffers is
       return Self.Allocation;
    end Allocation_Length;
 
+   ------------
+   -- Append --
+   ------------
+
+   procedure Append
+     (Self : in out Data_Buffer'Class;
+      Data : A0B.Types.Arrays.Unsigned_8_Array)
+   is
+      use type A0B.Types.Unsigned_32;
+      use type System.Storage_Elements.Storage_Offset;
+
+      New_Length : constant A0B.Types.Unsigned_32 :=
+        Self.Length + Data'Length;
+
+   begin
+      if New_Length <= Self.Capacity then
+         declare
+            Address : constant System.Address :=
+              Self.Address
+                + System.Storage_Elements.Storage_Offset (Self.Length);
+            Storage : A0B.Types.Arrays.Unsigned_8_Array
+              (1 .. Data'Length) with Import, Address => Address;
+
+         begin
+            Storage     := Data;
+            Self.Length := New_Length;
+         end;
+
+      else
+         raise Constraint_Error;
+      end if;
+   end Append;
+
    --------------
    -- Capacity --
    --------------

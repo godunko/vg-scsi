@@ -4,7 +4,7 @@
 
 with System;
 
-with A0B.Types;
+with A0B.Types.Arrays;
 
 package A0B.SCSI.Buffers with Pure is
 
@@ -42,6 +42,12 @@ package A0B.SCSI.Buffers with Pure is
    procedure Align
      (Self : in out Data_Buffer'Class;
       To   : A0B.Types.Unsigned_32);
+
+   procedure Append
+     (Self : in out Data_Buffer'Class;
+      Data : A0B.Types.Arrays.Unsigned_8_Array);
+   --  Appends the given data to the buffer, increasing buffer's actual length
+   --  by the length of the data.
 
 private
 
