@@ -141,7 +141,7 @@ package body A0B.SCSI.Buffers is
 
    function Length (Self : Data_Buffer'Class) return A0B.Types.Unsigned_32 is
    begin
-      return Self.Length;
+      return A0B.Types.Unsigned_32'Min (Self.Length, Self.Allocation);
    end Length;
 
    -----------
