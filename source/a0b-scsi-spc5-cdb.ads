@@ -54,6 +54,9 @@ package A0B.SCSI.SPC5.CDB with Pure is
       CONTROL           at 5 range 0 .. 7;
    end record;
 
+   INQUIRY_CDB_EVPD_Field       : constant CDB_Field_Byte_Bit := (1, 0);
+   INQUIRY_CDB_PAGE_CODED_Field : constant CDB_Field_Byte     := 2;
+
    --------------------------
    --  MODE SENSE(6) [1A]  --
    --------------------------

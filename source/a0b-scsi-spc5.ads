@@ -34,8 +34,14 @@ package A0B.SCSI.SPC5 with Pure is
      (16#0#, 16#00#, 16#00#);
    INVALID_COMMAND_OPERATION_CODE : constant A0B.SCSI.SAM5.Sense_Data :=
      (16#5#, 16#20#, 16#00#);
+   --  ILLEGAL REQUEST/INVALID COMMAND OPERATION CODE
    INVALID_FIELD_IN_CDB           : constant A0B.SCSI.SAM5.Sense_Data :=
      (16#5#, 16#24#, 16#00#);
+   --  ILLEGAL REQUEST/INVALID FIELD IN CDB
+   MEDIUM_NOT_PRESENT             : constant A0B.SCSI.SAM5.Sense_Data :=
+     (16#2#, 16#3A#, 16#00#);
+   --  NOT READY/MEDIUM NOT PRESENT
+
    --  OVERLAPPED_COMMAND_ATTEMPTED   : constant A0B.SCSI.SAM5.Sense_Data :=
    --    (16#B#, 16#4E#, 16#00#);
 
@@ -44,9 +50,7 @@ package A0B.SCSI.SPC5 with Pure is
    CDB_12_CONTROL_Byte : constant := 11;
    --  Byte number of the CONTROL field for CDB of 6/10/12-byte commands.
 
-   type CDB_Field_Byte is record
-      Byte : A0B.Types.Unsigned_16;
-   end record;
+   type CDB_Field_Byte is new A0B.Types.Unsigned_16;
 
    type CDB_Field_Byte_Bit is record
       Byte : A0B.Types.Unsigned_16;
