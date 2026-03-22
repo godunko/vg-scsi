@@ -33,6 +33,11 @@ package A0B.SCSI.Commands.SPC with Pure is
       SELECT_REPORT     : A0B.Types.Unsigned_8;
    end record;
 
+   type REQUEST_SENSE_Command_Descriptor is record
+      ALLOCATION_LENGTH : A0B.Types.Unsigned_32;
+      DESC              : Boolean;
+   end record;
+
    type TEST_UNIT_READY_Command_Descriptor is null record;
 
 end A0B.SCSI.Commands.SPC;

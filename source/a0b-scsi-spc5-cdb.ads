@@ -13,6 +13,7 @@ package A0B.SCSI.SPC5.CDB with Pure is
    INQUIRY_CDB_Length              : constant := 6;
    MODE_SENSE_6_CDB_Length         : constant := 6;
    REPORT_LUNS_CDB_Length          : constant := 12;
+   REQUEST_SENSE_CDB_Length        : constant := 6;
    SERVICE_ACTION_IN_16_CDB_Length : constant := 16;
    TEST_UNIT_READY_CDB_Length      : constant := 6;
 
@@ -94,9 +95,9 @@ package A0B.SCSI.SPC5.CDB with Pure is
       CONTROL           at 5 range 0 .. 7;
    end record;
 
-   ------------------------
-   --  REPORT LUNS [A0]  --
-   ------------------------
+   ----------------------
+   -- REPORT LUNS [A0] --
+   ----------------------
 
    type REPORT_LUNS_CDB is record
       OPERATION_CODE    : A0B.SCSI.SAM5.OPERATION_CODE :=
@@ -110,7 +111,7 @@ package A0B.SCSI.SPC5.CDB with Pure is
       Reserved_10       : A0B.Types.Reserved_8 := A0B.Types.Zero;
       CONTROL           : A0B.SCSI.SAM5.CONTROL;
    end record
-     with Size      => REPORT_LUNS_CDB_Length * A0B.Types.Unsigned_8'Size,
+     with Size      => REPORT_LUNS_CDB_Length * Byte_Size,
           Bit_Order => System.Low_Order_First;
 
    for REPORT_LUNS_CDB use record
@@ -125,52 +126,90 @@ package A0B.SCSI.SPC5.CDB with Pure is
       CONTROL           at 11 range 0 .. 7;
    end record;
 
-   -----------------------------------
-   --  SERVICE ACTION IN (16) [9E]  --
-   -----------------------------------
+   ------------------------
+   -- REQUEST SENSE [03] --
+   ------------------------
 
-   type SERVICE_ACTION_IN_16_CDB is record
+   type REQUEST_SENSE_CDB is record
       OPERATION_CODE    : A0B.SCSI.SAM5.OPERATION_CODE :=
-        A0B.SCSI.SPC5.SERVICE_ACTION_IN_16;
-      Reserved_1_7_5    : A0B.Types.Reserved_3;
-      SERVICE_ACTION    : A0B.SCSI.SAM5.SERVICE_ACTION;
-      Reserved_2        : A0B.Types.Reserved_8;
-      Reserved_3        : A0B.Types.Reserved_8;
-      Reserved_4        : A0B.Types.Reserved_8;
-      Reserved_5        : A0B.Types.Reserved_8;
-      Reserved_6        : A0B.Types.Reserved_8;
-      Reserved_7        : A0B.Types.Reserved_8;
-      Reserved_8        : A0B.Types.Reserved_8;
-      Reserved_9        : A0B.Types.Reserved_8;
-      Reserved_10       : A0B.Types.Reserved_8;
-      Reserved_11       : A0B.Types.Reserved_8;
-      Reserved_12       : A0B.Types.Reserved_8;
-      Reserved_13       : A0B.Types.Reserved_8;
-      Reserved_14       : A0B.Types.Reserved_8;
+        A0B.SCSI.SPC5.REQUEST_SENSE;
+      Reserved_1_7_7    : A0B.Types.Reserved_1 := A0B.Types.Zero;
+      Reserved_1_6_6    : A0B.Types.Reserved_1 := A0B.Types.Zero;
+      Reserved_1_5_5    : A0B.Types.Reserved_1 := A0B.Types.Zero;
+      Reserved_1_4_4    : A0B.Types.Reserved_1 := A0B.Types.Zero;
+      Reserved_1_3_3    : A0B.Types.Reserved_1 := A0B.Types.Zero;
+      Reserved_1_2_2    : A0B.Types.Reserved_1 := A0B.Types.Zero;
+      Reserved_1_1_1    : A0B.Types.Reserved_1 := A0B.Types.Zero;
+      DESC              : Boolean;
+      Reserved_2        : A0B.Types.Reserved_8 := A0B.Types.Zero;
+      Reserved_3        : A0B.Types.Reserved_8 := A0B.Types.Zero;
+      ALLOCATION_LENGTH : A0B.Types.Unsigned_8;
       CONTROL           : A0B.SCSI.SAM5.CONTROL;
    end record
-     with Size      =>
-            SERVICE_ACTION_IN_16_CDB_Length * A0B.Types.Unsigned_8'Size,
+     with Size      => REQUEST_SENSE_CDB_Length * Byte_Size,
+          Bit_Order => System.Low_Order_First;
+
+   for REQUEST_SENSE_CDB use record
+      OPERATION_CODE    at 0 range 0 .. 7;
+      DESC              at 1 range 0 .. 0;
+      Reserved_1_7_7    at 1 range 7 .. 7;
+      Reserved_1_6_6    at 1 range 6 .. 6;
+      Reserved_1_5_5    at 1 range 5 .. 5;
+      Reserved_1_4_4    at 1 range 4 .. 4;
+      Reserved_1_3_3    at 1 range 3 .. 3;
+      Reserved_1_2_2    at 1 range 2 .. 2;
+      Reserved_1_1_1    at 1 range 1 .. 1;
+      Reserved_2        at 2 range 0 .. 7;
+      Reserved_3        at 3 range 0 .. 7;
+      ALLOCATION_LENGTH at 4 range 0 .. 7;
+      CONTROL           at 5 range 0 .. 7;
+   end record;
+
+   ---------------------------------
+   -- SERVICE ACTION IN (16) [9E] --
+   ---------------------------------
+
+   type SERVICE_ACTION_IN_16_CDB is record
+      OPERATION_CODE : A0B.SCSI.SAM5.OPERATION_CODE :=
+        A0B.SCSI.SPC5.SERVICE_ACTION_IN_16;
+      Reserved_1_7_5 : A0B.Types.Reserved_3;
+      SERVICE_ACTION : A0B.SCSI.SAM5.SERVICE_ACTION;
+      Reserved_2     : A0B.Types.Reserved_8;
+      Reserved_3     : A0B.Types.Reserved_8;
+      Reserved_4     : A0B.Types.Reserved_8;
+      Reserved_5     : A0B.Types.Reserved_8;
+      Reserved_6     : A0B.Types.Reserved_8;
+      Reserved_7     : A0B.Types.Reserved_8;
+      Reserved_8     : A0B.Types.Reserved_8;
+      Reserved_9     : A0B.Types.Reserved_8;
+      Reserved_10    : A0B.Types.Reserved_8;
+      Reserved_11    : A0B.Types.Reserved_8;
+      Reserved_12    : A0B.Types.Reserved_8;
+      Reserved_13    : A0B.Types.Reserved_8;
+      Reserved_14    : A0B.Types.Reserved_8;
+      CONTROL        : A0B.SCSI.SAM5.CONTROL;
+   end record
+     with Size      => SERVICE_ACTION_IN_16_CDB_Length * Byte_Size,
           Bit_Order => System.Low_Order_First;
 
    for SERVICE_ACTION_IN_16_CDB use record
-      OPERATION_CODE    at 0 range 0 .. 7;
-      Reserved_1_7_5    at 1 range 5 .. 7;
-      SERVICE_ACTION    at 1 range 0 .. 4;
-      Reserved_2        at 2 range 0 .. 7;
-      Reserved_3        at 3 range 0 .. 7;
-      Reserved_4        at 4 range 0 .. 7;
-      Reserved_5        at 5 range 0 .. 7;
-      Reserved_6        at 6 range 0 .. 7;
-      Reserved_7        at 7 range 0 .. 7;
-      Reserved_8        at 8 range 0 .. 7;
-      Reserved_9        at 9 range 0 .. 7;
-      Reserved_10       at 10 range 0 .. 7;
-      Reserved_11       at 11 range 0 .. 7;
-      Reserved_12       at 12 range 0 .. 7;
-      Reserved_13       at 13 range 0 .. 7;
-      Reserved_14       at 14 range 0 .. 7;
-      CONTROL           at 15 range 0 .. 7;
+      OPERATION_CODE at 0 range 0 .. 7;
+      Reserved_1_7_5 at 1 range 5 .. 7;
+      SERVICE_ACTION at 1 range 0 .. 4;
+      Reserved_2     at 2 range 0 .. 7;
+      Reserved_3     at 3 range 0 .. 7;
+      Reserved_4     at 4 range 0 .. 7;
+      Reserved_5     at 5 range 0 .. 7;
+      Reserved_6     at 6 range 0 .. 7;
+      Reserved_7     at 7 range 0 .. 7;
+      Reserved_8     at 8 range 0 .. 7;
+      Reserved_9     at 9 range 0 .. 7;
+      Reserved_10    at 10 range 0 .. 7;
+      Reserved_11    at 11 range 0 .. 7;
+      Reserved_12    at 12 range 0 .. 7;
+      Reserved_13    at 13 range 0 .. 7;
+      Reserved_14    at 14 range 0 .. 7;
+      CONTROL        at 15 range 0 .. 7;
    end record;
 
    ----------------------------
