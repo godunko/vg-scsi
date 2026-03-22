@@ -6,7 +6,7 @@ with Ada.Unchecked_Conversion;
 
 with A0B.Types.Big_Endian;
 
-package body A0B.SCSI.SBC3.CDB with Pure is
+package body A0B.SCSI.SBC3.CDB is
 
    ---------------------------
    -- LOGICAL_BLOCK_ADDRESS --

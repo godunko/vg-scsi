@@ -2,7 +2,7 @@
 --  Copyright (C) 2026, Vadim Godunko <vgodunko@gmail.com>
 --
 
-package body A0B.SCSI.Decoders with Pure is
+package body A0B.SCSI.Decoders is
 
    USB_MSC_BOOT_CDB_Length  : constant := 12;
    iSCSI_CDB_Minumum_Length : constant := 16;

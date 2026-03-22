@@ -4,7 +4,7 @@
 
 with A0B.SCSI.SPC5.CDB;
 
-package body A0B.SCSI.Decoders.SPC.TEST_UNIT_READY with Pure is
+package body A0B.SCSI.Decoders.SPC.TEST_UNIT_READY is
 
    ----------------------------
    -- Decode_TEST_UNIT_READY --
