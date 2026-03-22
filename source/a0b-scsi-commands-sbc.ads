@@ -26,7 +26,6 @@ package A0B.SCSI.Commands.SBC with Pure is
    type READ_CAPACITY_Command_Descriptor is record
       Variant           : READ_CAPACITY_Variant;
       ALLOCATION_LENGTH : A0B.Types.Unsigned_32;
-      SERVICE_ACTION    : A0B.SCSI.SAM5.SERVICE_ACTION;
    end record;
 
    type WRITE_Command_Descriptor is record

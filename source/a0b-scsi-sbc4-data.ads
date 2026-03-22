@@ -10,11 +10,28 @@ with A0B.Types.Big_Endian;
 
 package A0B.SCSI.SBC4.Data with Pure is
 
+   READ_CAPACITY_10_Data_Length : constant := 8;
    READ_CAPACITY_16_Data_Length : constant := 32;
 
-   --------------------------
-   --  READ CAPACITY (16)  --
-   --------------------------
+   -----------------------
+   -- READ_CAPACITY(10) --
+   -----------------------
+
+   type READ_CAPACITY_10_Data is record
+      RETURNED_LOGICAL_BLOCK_ADDRESS : A0B.Types.Big_Endian.Unsigned_32;
+      BLOCK_LENGTH_IN_BYTES          : A0B.Types.Big_Endian.Unsigned_32;
+   end record
+     with Size      => READ_CAPACITY_10_Data_Length * Byte_Size,
+          Bit_Order => System.Low_Order_First;
+
+   for READ_CAPACITY_10_Data use record
+      RETURNED_LOGICAL_BLOCK_ADDRESS at 0 range 0 .. 31;
+      BLOCK_LENGTH_IN_BYTES          at 4 range 0 .. 31;
+   end record;
+
+   -------------------------
+   --  READ CAPACITY(16)  --
+   -------------------------
 
    type READ_CAPACITY_16_Data is record
       RETURNED_LOGICAL_BLOCK_ADDRESS : A0B.Types.Big_Endian.Unsigned_64;
