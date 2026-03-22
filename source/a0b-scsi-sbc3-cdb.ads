@@ -2,7 +2,7 @@
 --  Copyright (C) 2025-2026, Vadim Godunko <vgodunko@gmail.com>
 --
 
---  SCSI Block Commands - 4 (SBC-4) Command Descriptor Block
+--  SCSI Block Commands - 3 (SBC-3) Command Descriptor Block
 
 with System;
 
