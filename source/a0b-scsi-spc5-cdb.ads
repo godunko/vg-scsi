@@ -165,6 +165,8 @@ package A0B.SCSI.SPC5.CDB with Pure is
       CONTROL           at 5 range 0 .. 7;
    end record;
 
+   REQUEST_SENSE_CDB_DESC_Field : constant CDB_Field_Byte_Bit := (1, 0);
+
    ---------------------------------
    -- SERVICE ACTION IN (16) [9E] --
    ---------------------------------

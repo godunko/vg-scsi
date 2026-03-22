@@ -44,4 +44,13 @@ package A0B.SCSI.SPC5 with Pure is
    CDB_12_CONTROL_Byte : constant := 11;
    --  Byte number of the CONTROL field for CDB of 6/10/12-byte commands.
 
+   type CDB_Field_Byte is record
+      Byte : A0B.Types.Unsigned_16;
+   end record;
+
+   type CDB_Field_Byte_Bit is record
+      Byte : A0B.Types.Unsigned_16;
+      Bit  : A0B.Types.Unsigned_3;
+   end record;
+
 end A0B.SCSI.SPC5;
