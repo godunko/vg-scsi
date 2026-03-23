@@ -51,12 +51,12 @@ package A0B.SCSI.Decoders with Pure is
       Byte : A0B.Types.Unsigned_16;
       Bit  : A0B.Types.Unsigned_3) is abstract;
 
-private
-
    function Check_CDB_Length
      (Self                : in out Abstract_CDB_Decoder'Class;
       Expected_CDB_Length : A0B.Types.Unsigned_32;
       CDB_Storage         : A0B.Types.Arrays.Unsigned_8_Array) return Boolean;
+
+private
 
    function Check_USB_MSC_BOOT_CDB_Length
      (Self                : in out Abstract_CDB_Decoder'Class;
