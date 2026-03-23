@@ -22,7 +22,7 @@ package body A0B.SCSI.Decoders.SPC.REQUEST_SENSE is
       use type A0B.Types.Reserved_8;
 
    begin
-      if not Self.Check_CDB_Length
+      if not Self.Check_USB_MSC_BOOT_CDB_Length
         (A0B.SCSI.SPC5.CDB.REQUEST_SENSE_CDB_Length, CDB_Storage)
       then
          return False;
