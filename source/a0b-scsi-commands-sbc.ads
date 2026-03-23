@@ -6,8 +6,6 @@
 
 with A0B.Types;
 
-with A0B.SCSI.SAM5;
-
 package A0B.SCSI.Commands.SBC with Pure is
 
    type READ_Command_Descriptor is record

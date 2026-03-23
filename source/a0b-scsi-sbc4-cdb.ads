@@ -118,20 +118,21 @@ package A0B.SCSI.SBC4.CDB with Pure is
    type READ_CAPACITY_16_CDB is record
       OPERATION_CODE    : A0B.SCSI.SAM5.OPERATION_CODE  :=
         A0B.SCSI.SPC5.SERVICE_ACTION_IN_16;
-      Reserved_1_7_5    : A0B.Types.Reserved_3 := A0B.Types.Zero;
+      Reserved_1_7_7    : A0B.Types.Reserved_1  := A0B.Types.Zero;
+      Reserved_1_6_6    : A0B.Types.Reserved_1  := A0B.Types.Zero;
+      Reserved_1_5_5    : A0B.Types.Reserved_1  := A0B.Types.Zero;
       SERVICE_ACTION    : A0B.SCSI.SAM5.SERVICE_ACTION  :=
         A0B.SCSI.SBC4.READ_CAPACITY_16;
-      Obsolete_2        : A0B.Types.Reserved_8 := A0B.Types.Zero;
-      Obsolete_3        : A0B.Types.Reserved_8 := A0B.Types.Zero;
-      Obsolete_4        : A0B.Types.Reserved_8 := A0B.Types.Zero;
-      Obsolete_5        : A0B.Types.Reserved_8 := A0B.Types.Zero;
-      Obsolete_6        : A0B.Types.Reserved_8 := A0B.Types.Zero;
-      Obsolete_7        : A0B.Types.Reserved_8 := A0B.Types.Zero;
-      Obsolete_8        : A0B.Types.Reserved_8 := A0B.Types.Zero;
-      Obsolete_9        : A0B.Types.Reserved_8 := A0B.Types.Zero;
+      Obsolete_2_9      : A0B.Types.Reserved_64 := A0B.Types.Zero;
       ALLOCATION_LENGTH : A0B.Types.Big_Endian.Unsigned_32;
-      Reserved_14_7_1   : A0B.Types.Reserved_7 := A0B.Types.Zero;
-      Obsolete_14_0_0   : A0B.Types.Reserved_1 := A0B.Types.Zero;
+      Reserved_14_7_7   : A0B.Types.Reserved_1  := A0B.Types.Zero;
+      Reserved_14_6_6   : A0B.Types.Reserved_1  := A0B.Types.Zero;
+      Reserved_14_5_5   : A0B.Types.Reserved_1  := A0B.Types.Zero;
+      Reserved_14_4_4   : A0B.Types.Reserved_1  := A0B.Types.Zero;
+      Reserved_14_3_3   : A0B.Types.Reserved_1  := A0B.Types.Zero;
+      Reserved_14_2_2   : A0B.Types.Reserved_1  := A0B.Types.Zero;
+      Reserved_14_1_1   : A0B.Types.Reserved_1  := A0B.Types.Zero;
+      Obsolete_14_0_0   : A0B.Types.Reserved_1  := A0B.Types.Zero;
       CONTROL           : A0B.SCSI.SAM5.CONTROL;
    end record
      with Size      => READ_CAPACITY_16_CDB_Length * Byte_Size,
@@ -139,19 +140,20 @@ package A0B.SCSI.SBC4.CDB with Pure is
 
    for READ_CAPACITY_16_CDB use record
       OPERATION_CODE    at 0 range 0 .. 7;
-      Reserved_1_7_5    at 1 range 5 .. 7;
       SERVICE_ACTION    at 1 range 0 .. 4;
-      Obsolete_2        at 2 range 0 .. 7;
-      Obsolete_3        at 3 range 0 .. 7;
-      Obsolete_4        at 4 range 0 .. 7;
-      Obsolete_5        at 5 range 0 .. 7;
-      Obsolete_6        at 6 range 0 .. 7;
-      Obsolete_7        at 7 range 0 .. 7;
-      Obsolete_8        at 8 range 0 .. 7;
-      Obsolete_9        at 9 range 0 .. 7;
+      Reserved_1_5_5    at 1 range 5 .. 5;
+      Reserved_1_6_6    at 1 range 6 .. 6;
+      Reserved_1_7_7    at 1 range 7 .. 7;
+      Obsolete_2_9      at 2 range 0 .. 63;
       ALLOCATION_LENGTH at 10 range 0 .. 31;
       Obsolete_14_0_0   at 14 range 0 .. 0;
-      Reserved_14_7_1   at 14 range 1 .. 7;
+      Reserved_14_1_1   at 14 range 1 .. 1;
+      Reserved_14_2_2   at 14 range 2 .. 2;
+      Reserved_14_3_3   at 14 range 3 .. 3;
+      Reserved_14_4_4   at 14 range 4 .. 4;
+      Reserved_14_5_5   at 14 range 5 .. 5;
+      Reserved_14_6_6   at 14 range 6 .. 6;
+      Reserved_14_7_7   at 14 range 7 .. 7;
       CONTROL           at 15 range 0 .. 7;
    end record;
 

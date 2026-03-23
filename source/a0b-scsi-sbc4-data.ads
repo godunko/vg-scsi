@@ -36,18 +36,21 @@ package A0B.SCSI.SBC4.Data with Pure is
    type READ_CAPACITY_16_Data is record
       RETURNED_LOGICAL_BLOCK_ADDRESS : A0B.Types.Big_Endian.Unsigned_64;
       BLOCK_LENGTH_IN_BYTES          : A0B.Types.Big_Endian.Unsigned_32;
-      Reserved_12_7_6                : A0B.Types.Reserved_2 := A0B.Types.Zero;
+      Reserved_12_7_7                : A0B.Types.Reserved_1 := A0B.Types.Zero;
+      Reserved_12_6_6                : A0B.Types.Reserved_1 := A0B.Types.Zero;
       Restricted_For_ZBC             : A0B.Types.Reserved_2 := A0B.Types.Zero;
       P_TYPE                         : A0B.Types.Unsigned_3;
       PROT_EN                        : Boolean;
       P_I_EXPONENT                   : A0B.Types.Unsigned_4;
       LOGICAL_BLOCKS_PER_PHYSICAL_BLOCK_EXPONENT :
                                        A0B.Types.Unsigned_4;
-      --  LBPME                          : Boolean;
-      --  LBPRZ                          : Boolean;
-      --  LOWEST ALIGNED LOGICAL BLOCK ADDRESS : A0B.Types.Big_Endian.Unsigned_14;
-      --  There is no way to declare layout of these components
-      LOWEST_ALIGNED_LOGICAL_BLOCK_ADDRESS : A0B.Types.Big_Endian.Unsigned_16;
+      Private_14_15                  : A0B.Types.Reserved_16;
+      --  There is no way to declare layout of these components, use
+      --  subprograms instead:
+      --    LBPME                    : Boolean;
+      --    LBPRZ                    : Boolean;
+      --    LOWEST ALIGNED LOGICAL BLOCK ADDRESS :
+      --                               A0B.Types.Big_Endian.Unsigned_14;
       Reserved_16                    : A0B.Types.Reserved_8 := A0B.Types.Zero;
       Reserved_17                    : A0B.Types.Reserved_8 := A0B.Types.Zero;
       Reserved_18                    : A0B.Types.Reserved_8 := A0B.Types.Zero;
@@ -69,31 +72,52 @@ package A0B.SCSI.SBC4.Data with Pure is
           Bit_Order => System.Low_Order_First;
 
    for READ_CAPACITY_16_Data use record
-      RETURNED_LOGICAL_BLOCK_ADDRESS             at 0 range 0 .. 63;
-      BLOCK_LENGTH_IN_BYTES                      at 8 range 0 .. 31;
-      PROT_EN                                    at 12 range 0 .. 0;
-      P_TYPE                                     at 12 range 1 .. 3;
-      Restricted_For_ZBC                         at 12 range 4 .. 5;
-      Reserved_12_7_6                            at 12 range 6 .. 7;
-      LOGICAL_BLOCKS_PER_PHYSICAL_BLOCK_EXPONENT at 13 range 0 .. 3;
-      P_I_EXPONENT                               at 13 range 4 .. 7;
-      LOWEST_ALIGNED_LOGICAL_BLOCK_ADDRESS       at 14 range 0 .. 15;
-      Reserved_16                                at 16 range 0 .. 7;
-      Reserved_17                                at 17 range 0 .. 7;
-      Reserved_18                                at 18 range 0 .. 7;
-      Reserved_19                                at 19 range 0 .. 7;
-      Reserved_20                                at 20 range 0 .. 7;
-      Reserved_21                                at 21 range 0 .. 7;
-      Reserved_22                                at 22 range 0 .. 7;
-      Reserved_23                                at 23 range 0 .. 7;
-      Reserved_24                                at 24 range 0 .. 7;
-      Reserved_25                                at 25 range 0 .. 7;
-      Reserved_26                                at 26 range 0 .. 7;
-      Reserved_27                                at 27 range 0 .. 7;
-      Reserved_28                                at 28 range 0 .. 7;
-      Reserved_29                                at 29 range 0 .. 7;
-      Reserved_30                                at 30 range 0 .. 7;
-      Reserved_31                                at 31 range 0 .. 7;
+      RETURNED_LOGICAL_BLOCK_ADDRESS               at 0 range 0 .. 63;
+      BLOCK_LENGTH_IN_BYTES                        at 8 range 0 .. 31;
+      PROT_EN                                      at 12 range 0 .. 0;
+      P_TYPE                                       at 12 range 1 .. 3;
+      Restricted_For_ZBC                           at 12 range 4 .. 5;
+      Reserved_12_6_6                              at 12 range 6 .. 6;
+      Reserved_12_7_7                              at 12 range 7 .. 7;
+      LOGICAL_BLOCKS_PER_PHYSICAL_BLOCK_EXPONENT   at 13 range 0 .. 3;
+      P_I_EXPONENT                                 at 13 range 4 .. 7;
+      Private_14_15                                at 14 range 0 .. 15;
+      Reserved_16                                  at 16 range 0 .. 7;
+      Reserved_17                                  at 17 range 0 .. 7;
+      Reserved_18                                  at 18 range 0 .. 7;
+      Reserved_19                                  at 19 range 0 .. 7;
+      Reserved_20                                  at 20 range 0 .. 7;
+      Reserved_21                                  at 21 range 0 .. 7;
+      Reserved_22                                  at 22 range 0 .. 7;
+      Reserved_23                                  at 23 range 0 .. 7;
+      Reserved_24                                  at 24 range 0 .. 7;
+      Reserved_25                                  at 25 range 0 .. 7;
+      Reserved_26                                  at 26 range 0 .. 7;
+      Reserved_27                                  at 27 range 0 .. 7;
+      Reserved_28                                  at 28 range 0 .. 7;
+      Reserved_29                                  at 29 range 0 .. 7;
+      Reserved_30                                  at 30 range 0 .. 7;
+      Reserved_31                                  at 31 range 0 .. 7;
    end record;
+
+   function Get_LBPME (Data : READ_CAPACITY_16_Data) return Boolean;
+
+   function Get_LBPRZ (Data : READ_CAPACITY_16_Data) return Boolean;
+
+   function Get_LOWEST_ALIGNED_LOGICAL_BLOCK_ADDRESS
+     (Data : READ_CAPACITY_16_Data) return A0B.Types.Unsigned_14;
+
+   procedure Set_LBPME (Data : in out READ_CAPACITY_16_Data; To : Boolean);
+
+   procedure Set_LBPRZ (Data : in out READ_CAPACITY_16_Data; To : Boolean);
+
+   procedure Set_LOWEST_ALIGNED_LOGICAL_BLOCK_ADDRESS
+     (Data : in out READ_CAPACITY_16_Data; To : A0B.Types.Unsigned_14);
+
+   function As_Private_14_15
+     (LBPME                                : Boolean;
+      LBPRZ                                : Boolean;
+      LOWEST_ALIGNED_LOGICAL_BLOCK_ADDRESS : A0B.Types.Unsigned_14)
+      return A0B.Types.Reserved_16;
 
 end A0B.SCSI.SBC4.Data;
