@@ -57,7 +57,8 @@ package body A0B.SCSI.Decoders.SBC.READ_10 is
          end if;
 
          Descriptor :=
-           (GROUP_NUMBER          => CDB.GROUP_NUMBER,
+           (Variant               => A0B.SCSI.Commands.SBC.READ_10,
+            GROUP_NUMBER          => CDB.GROUP_NUMBER,
             LOGICAL_BLOCK_ADDRESS =>
               A0B.Types.Unsigned_64 (CDB.LOGICAL_BLOCK_ADDRESS.Value),
             TRANSFER_LENGTH       =>

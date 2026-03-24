@@ -54,7 +54,8 @@ package body A0B.SCSI.Decoders.SBC.READ_6 is
          end if;
 
          Descriptor :=
-           (GROUP_NUMBER          => 0,      --  Not present in READ(6)
+           (Variant               => A0B.SCSI.Commands.SBC.READ_6,
+            GROUP_NUMBER          => 0,      --  Not present in READ(6)
             LOGICAL_BLOCK_ADDRESS =>
               A0B.SCSI.SBC3.CDB.LOGICAL_BLOCK_ADDRESS (CDB),
             TRANSFER_LENGTH       =>

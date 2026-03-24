@@ -8,7 +8,10 @@ with A0B.Types;
 
 package A0B.SCSI.Commands.SBC with Pure is
 
+   type READ_Variant is (READ_6, READ_10, READ_12, READ_16, READ_32);
+
    type READ_Command_Descriptor is record
+      Variant               : READ_Variant;
       GROUP_NUMBER          : A0B.Types.Unsigned_6;
       LOGICAL_BLOCK_ADDRESS : A0B.Types.Unsigned_64;
       TRANSFER_LENGTH       : A0B.Types.Unsigned_32;
