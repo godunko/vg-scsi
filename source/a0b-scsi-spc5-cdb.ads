@@ -54,8 +54,8 @@ package A0B.SCSI.SPC5.CDB with Pure is
       CONTROL           at 5 range 0 .. 7;
    end record;
 
-   INQUIRY_CDB_EVPD_Field       : constant CDB_Field_Byte_Bit := (1, 0);
-   INQUIRY_CDB_PAGE_CODED_Field : constant CDB_Field_Byte     := 2;
+   INQUIRY_EVPD      : constant CDB_Field_Byte_Bit := (1, 0);
+   INQUIRY_PAGE_CODE : constant CDB_Field_Byte     := 2;
 
    --------------------------
    --  MODE SENSE(6) [1A]  --
@@ -168,7 +168,7 @@ package A0B.SCSI.SPC5.CDB with Pure is
       CONTROL           at 5 range 0 .. 7;
    end record;
 
-   REQUEST_SENSE_CDB_DESC_Field : constant CDB_Field_Byte_Bit := (1, 0);
+   REQUEST_SENSE_DESC : constant CDB_Field_Byte_Bit := (1, 0);
 
    ---------------------------------
    -- SERVICE ACTION IN (16) [9E] --
@@ -216,6 +216,9 @@ package A0B.SCSI.SPC5.CDB with Pure is
       Reserved_14    at 14 range 0 .. 7;
       CONTROL        at 15 range 0 .. 7;
    end record;
+
+   SERVICE_ACTION_IN_16_SERVICE_ACTION : constant CDB_Field_Byte_Bit :=
+     (1, 4);
 
    ----------------------------
    --  TEST UNIT READY [00]  --

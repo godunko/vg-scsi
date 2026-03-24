@@ -56,6 +56,9 @@ package A0B.SCSI.SBC4.CDB with Pure is
       CONTROL               at 9 range 0 .. 7;
    end record;
 
+   READ_10_LOGICAL_BLOCK_ADDRESS : constant A0B.SCSI.SPC5.CDB_Field_Byte := 2;
+   READ_10_TRANSFER_LENGTH       : constant A0B.SCSI.SPC5.CDB_Field_Byte := 7;
+
    ----------------------------
    -- READ CAPACITY(10) [25] --
    ----------------------------

@@ -6,6 +6,7 @@
 
 with System;
 
+with A0B.SCSI.SPC5;
 with A0B.Types;
 
 package A0B.SCSI.SBC3.CDB with Pure is
@@ -38,6 +39,10 @@ package A0B.SCSI.SBC3.CDB with Pure is
       TRANSFER_LENGTH                at 4 range 0 .. 7;
       CONTROL                        at 5 range 0 .. 7;
    end record;
+
+   READ_6_LOGICAL_BLOCK_ADDRESS : constant A0B.SCSI.SPC5.CDB_Field_Byte_Bit :=
+     (1, 4);
+   READ_6_TRANSFER_LENGTH       : constant A0B.SCSI.SPC5.CDB_Field_Byte := 4;
 
    function LOGICAL_BLOCK_ADDRESS
      (CDB : READ_6_CDB) return A0B.Types.Unsigned_64 with Inline;
