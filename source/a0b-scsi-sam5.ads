@@ -68,11 +68,9 @@ package A0B.SCSI.SAM5 with Pure is
    type ADDITIONAL_SENSE_CODE is new A0B.Types.Unsigned_8;
    type ADDITIONAL_SENSE_CODE_QUALIFIER is new A0B.Types.Unsigned_8;
 
-   type Sense_Data is record
-      SENSE_KEY                       : A0B.SCSI.SAM5.SENSE_KEY;
-      ADDITIONAL_SENSE_CODE           : A0B.SCSI.SAM5.ADDITIONAL_SENSE_CODE;
-      ADDITIONAL_SENSE_CODE_QUALIFIER :
-        A0B.SCSI.SAM5.ADDITIONAL_SENSE_CODE_QUALIFIER;
+   type Sense_Code is record
+      Code      : ADDITIONAL_SENSE_CODE;
+      Qualifier : ADDITIONAL_SENSE_CODE_QUALIFIER;
    end record;
 
 end A0B.SCSI.SAM5;

@@ -28,21 +28,38 @@ package A0B.SCSI.SPC5 with Pure is
 
    All_Pages                              : constant Mode_Page_Code := 16#3F#;
 
-   --  REQUEST_SENSE_Command_Block_Length   : constant := 6;
+   ----------------
+   -- Sense Data --
+   ----------------
 
-   NO_SENSE                       : constant A0B.SCSI.SAM5.Sense_Data :=
-     (16#0#, 16#00#, 16#00#);
-   INVALID_COMMAND_OPERATION_CODE : constant A0B.SCSI.SAM5.Sense_Data :=
-     (16#5#, 16#20#, 16#00#);
-   --  ILLEGAL REQUEST/INVALID COMMAND OPERATION CODE
-   INVALID_FIELD_IN_CDB           : constant A0B.SCSI.SAM5.Sense_Data :=
-     (16#5#, 16#24#, 16#00#);
-   --  ILLEGAL REQUEST/INVALID FIELD IN CDB
-   MEDIUM_NOT_PRESENT             : constant A0B.SCSI.SAM5.Sense_Data :=
-     (16#2#, 16#3A#, 16#00#);
-   --  NOT READY/MEDIUM NOT PRESENT
+   NO_SENSE        : constant A0B.SCSI.SAM5.SENSE_KEY := 16#0#;
+   RECOVERED_ERROR : constant A0B.SCSI.SAM5.SENSE_KEY := 16#1#;
+   NOT_READY       : constant A0B.SCSI.SAM5.SENSE_KEY := 16#2#;
+   MEDIUM_ERROR    : constant A0B.SCSI.SAM5.SENSE_KEY := 16#3#;
+   HARDWARE_ERROR  : constant A0B.SCSI.SAM5.SENSE_KEY := 16#4#;
+   ILLEGAL_REQUEST : constant A0B.SCSI.SAM5.SENSE_KEY := 16#5#;
+   UNIT_ATTENTION  : constant A0B.SCSI.SAM5.SENSE_KEY := 16#6#;
+   DATA_PROTECT    : constant A0B.SCSI.SAM5.SENSE_KEY := 16#7#;
+   BLANK_CHECK     : constant A0B.SCSI.SAM5.SENSE_KEY := 16#8#;
+   VENDOR_SPECIFIC : constant A0B.SCSI.SAM5.SENSE_KEY := 16#9#;
+   COPY_ABORTED    : constant A0B.SCSI.SAM5.SENSE_KEY := 16#A#;
+   ABORTED_COMMAND : constant A0B.SCSI.SAM5.SENSE_KEY := 16#B#;
+   VOLUME_OVERFLOW : constant A0B.SCSI.SAM5.SENSE_KEY := 16#D#;
+   MISCOMPARE      : constant A0B.SCSI.SAM5.SENSE_KEY := 16#E#;
+   COMPLETED       : constant A0B.SCSI.SAM5.SENSE_KEY := 16#F#;
 
-   --  OVERLAPPED_COMMAND_ATTEMPTED   : constant A0B.SCSI.SAM5.Sense_Data :=
+   NO_ADDITIONAL_SENSE_INFORMATION    : constant A0B.SCSI.SAM5.Sense_Code :=
+     (16#00#, 16#00#);
+   INVALID_COMMAND_OPERATION_CODE     : constant A0B.SCSI.SAM5.Sense_Code :=
+     (16#20#, 16#00#);
+   INVALID_FIELD_IN_CDB               : constant A0B.SCSI.SAM5.Sense_Code :=
+     (16#24#, 16#00#);
+   LOGICAL_BLOCK_ADDRESS_OUT_OF_RANGE : constant A0B.SCSI.SAM5.Sense_Code :=
+     (16#21#, 16#00#);
+   MEDIUM_NOT_PRESENT                 : constant A0B.SCSI.SAM5.Sense_Code :=
+     (16#3A#, 16#00#);
+
+   --  OVERLAPPED_COMMAND_ATTEMPTED   : constant A0B.SCSI.SAM5.Sense_Code :=
    --    (16#B#, 16#4E#, 16#00#);
 
    CDB_6_CONTROL_Byte  : constant := 5;
