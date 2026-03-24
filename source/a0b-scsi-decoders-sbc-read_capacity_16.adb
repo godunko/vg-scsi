@@ -21,8 +21,6 @@ package body A0B.SCSI.Decoders.SBC.READ_CAPACITY_16 is
       use type A0B.SCSI.SAM5.OPERATION_CODE;
       use type A0B.SCSI.SAM5.SERVICE_ACTION;
       use type A0B.Types.Reserved_1;
-      use type A0B.Types.Reserved_8;
-      use type A0B.Types.Reserved_32;
       use type A0B.Types.Reserved_64;
 
    begin
