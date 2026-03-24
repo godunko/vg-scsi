@@ -68,7 +68,14 @@ package A0B.SCSI.SBC4.Data with Pure is
       Reserved_30                    : A0B.Types.Reserved_8 := A0B.Types.Zero;
       Reserved_31                    : A0B.Types.Reserved_8 := A0B.Types.Zero;
    end record
-     with Size      => READ_CAPACITY_16_Data_Length * Byte_Size,
+     with Alignment => 4,
+          --  Override default alignment to avoid constraint error on
+          --  overlaying this type with a storage element array of data
+          --  buffer. On 32bit systems, typical alignment of such buffers is
+          --  4 bytes. It is possible to use 1 byte alignment, however, it is
+          --  not clear if it would cause performance degradation on some
+          --  systems.
+          Size      => READ_CAPACITY_16_Data_Length * Byte_Size,
           Bit_Order => System.Low_Order_First;
 
    for READ_CAPACITY_16_Data use record
