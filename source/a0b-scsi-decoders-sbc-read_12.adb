@@ -21,7 +21,7 @@ package body A0B.SCSI.Decoders.SBC.READ_12 is
       use type A0B.Types.Reserved_1;
 
    begin
-      if not Self.Check_USB_MSC_BOOT_CDB_Length
+      if not Self.Check_CDB_Length
         (A0B.SCSI.SBC4.CDB.READ_12_CDB_Length, CDB_Storage)
       then
          return False;
