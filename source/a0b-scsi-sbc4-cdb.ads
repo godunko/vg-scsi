@@ -13,6 +13,7 @@ with A0B.SCSI.SPC5;
 package A0B.SCSI.SBC4.CDB with Pure is
 
    READ_10_CDB_Length          : constant := 10;
+   READ_16_CDB_Length          : constant := 16;
    READ_CAPACITY_10_CDB_Length : constant := 10;
    READ_CAPACITY_16_CDB_Length : constant := 16;
    WRITE_10_CDB_Length         : constant := 10;
@@ -58,6 +59,58 @@ package A0B.SCSI.SBC4.CDB with Pure is
 
    READ_10_LOGICAL_BLOCK_ADDRESS : constant A0B.SCSI.SPC5.CDB_Field_Byte := 2;
    READ_10_TRANSFER_LENGTH       : constant A0B.SCSI.SPC5.CDB_Field_Byte := 7;
+
+   -------------------
+   -- READ(16) [88] --
+   -------------------
+
+   type READ_16_CDB is record
+      OPERATION_CODE        : A0B.SCSI.SAM5.OPERATION_CODE :=
+        A0B.SCSI.SBC4.READ_16;
+      RDPROTECT             : A0B.Types.Unsigned_3;
+      DPO                   : Boolean;
+      FUA                   : Boolean;
+      RARC                  : Boolean;
+      Obsolete_1_1_1        : A0B.Types.Reserved_1     := A0B.Types.Zero;
+      DLD2                  : A0B.Types.Unsigned_1;
+      LOGICAL_BLOCK_ADDRESS : A0B.Types.Big_Endian.Unsigned_64;
+      TRANSFER_LENGTH       : A0B.Types.Big_Endian.Unsigned_32;
+      DLD1                  : A0B.Types.Unsigned_1;
+      DLD0                  : A0B.Types.Unsigned_1;
+      GROUP_NUMBER          : A0B.Types.Unsigned_6;
+      CONTROL               : A0B.SCSI.SAM5.CONTROL;
+   end record
+     with Size      => READ_16_CDB_Length * Byte_Size,
+          Bit_Order => System.Low_Order_First;
+
+   for READ_16_CDB use record
+      OPERATION_CODE        at 0 range 0 .. 7;
+      DLD2                  at 1 range 0 .. 0;
+      Obsolete_1_1_1        at 1 range 1 .. 1;
+      RARC                  at 1 range 2 .. 2;
+      FUA                   at 1 range 3 .. 3;
+      DPO                   at 1 range 4 .. 4;
+      RDPROTECT             at 1 range 5 .. 7;
+      LOGICAL_BLOCK_ADDRESS at 2 range 0 .. 63;
+      TRANSFER_LENGTH       at 10 range 0 .. 31;
+      GROUP_NUMBER          at 14 range 0 .. 5;
+      DLD0                  at 14 range 6 .. 6;
+      DLD1                  at 14 range 7 .. 7;
+      CONTROL               at 15 range 0 .. 7;
+   end record;
+
+   READ_16_LOGICAL_BLOCK_ADDRESS : constant A0B.SCSI.SPC5.CDB_Field_Byte := 2;
+   READ_16_TRANSFER_LENGTH       : constant A0B.SCSI.SPC5.CDB_Field_Byte := 10;
+
+   function Get_DLD (CDB : READ_16_CDB) return A0B.Types.Unsigned_3;
+
+   procedure Set_DLD (CDB : in out READ_16_CDB; DLD : A0B.Types.Unsigned_3);
+
+   function As_DLD0 (DLD : A0B.Types.Unsigned_3) return A0B.Types.Unsigned_1;
+
+   function As_DLD1 (DLD : A0B.Types.Unsigned_3) return A0B.Types.Unsigned_1;
+
+   function As_DLD2 (DLD : A0B.Types.Unsigned_3) return A0B.Types.Unsigned_1;
 
    ----------------------------
    -- READ CAPACITY(10) [25] --
