@@ -342,4 +342,50 @@ package A0B.SCSI.SBC4.CDB with Pure is
    WRITE_12_LOGICAL_BLOCK_ADDRESS : constant A0B.SCSI.SPC5.CDB_Field_Byte := 2;
    WRITE_12_TRANSFER_LENGTH       : constant A0B.SCSI.SPC5.CDB_Field_Byte := 6;
 
+   -------------------
+   -- WRITE(16) [88] --
+   -------------------
+
+   type WRITE_16_CDB is record
+      OPERATION_CODE        : A0B.SCSI.SAM5.OPERATION_CODE :=
+        A0B.SCSI.SBC4.WRITE_16;
+      WRPROTECT             : A0B.Types.Unsigned_3;
+      DPO                   : Boolean;
+      FUA                   : Boolean;
+      Reserved_1_2_2        : A0B.Types.Reserved_1 := A0B.Types.Zero;
+      Obsolete_1_1_1        : A0B.Types.Reserved_1 := A0B.Types.Zero;
+      DLD2                  : A0B.Types.Unsigned_1;
+      LOGICAL_BLOCK_ADDRESS : A0B.Types.Big_Endian.Unsigned_64;
+      TRANSFER_LENGTH       : A0B.Types.Big_Endian.Unsigned_32;
+      DLD1                  : A0B.Types.Unsigned_1;
+      DLD0                  : A0B.Types.Unsigned_1;
+      GROUP_NUMBER          : A0B.Types.Unsigned_6;
+      CONTROL               : A0B.SCSI.SAM5.CONTROL;
+   end record
+     with Size      => WRITE_16_CDB_Length * Byte_Size,
+          Bit_Order => System.Low_Order_First;
+
+   for WRITE_16_CDB use record
+      OPERATION_CODE        at 0 range 0 .. 7;
+      DLD2                  at 1 range 0 .. 0;
+      Obsolete_1_1_1        at 1 range 1 .. 1;
+      Reserved_1_2_2        at 1 range 2 .. 2;
+      FUA                   at 1 range 3 .. 3;
+      DPO                   at 1 range 4 .. 4;
+      WRPROTECT             at 1 range 5 .. 7;
+      LOGICAL_BLOCK_ADDRESS at 2 range 0 .. 63;
+      TRANSFER_LENGTH       at 10 range 0 .. 31;
+      GROUP_NUMBER          at 14 range 0 .. 5;
+      DLD0                  at 14 range 6 .. 6;
+      DLD1                  at 14 range 7 .. 7;
+      CONTROL               at 15 range 0 .. 7;
+   end record;
+
+   WRITE_16_LOGICAL_BLOCK_ADDRESS : constant A0B.SCSI.SPC5.CDB_Field_Byte := 2;
+   WRITE_16_TRANSFER_LENGTH       : constant A0B.SCSI.SPC5.CDB_Field_Byte := 10;
+
+   function Get_DLD (CDB : WRITE_16_CDB) return A0B.Types.Unsigned_3;
+
+   procedure Set_DLD (CDB : in out WRITE_16_CDB; DLD : A0B.Types.Unsigned_3);
+
 end A0B.SCSI.SBC4.CDB;

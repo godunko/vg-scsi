@@ -78,10 +78,38 @@ package body A0B.SCSI.SBC4.CDB is
    end Get_DLD;
 
    -------------
+   -- Get_DLD --
+   -------------
+
+   function Get_DLD (CDB : WRITE_16_CDB) return A0B.Types.Unsigned_3 is
+      Aux : constant DLD_Field :=
+        (As_Bits => True,
+         DLD2    => CDB.DLD2,
+         DLD1    => CDB.DLD1,
+         DLD0    => CDB.DLD0);
+
+   begin
+      return Aux.DLD;
+   end Get_DLD;
+
+   -------------
    -- Set_DLD --
    -------------
 
    procedure Set_DLD (CDB : in out READ_16_CDB; DLD : A0B.Types.Unsigned_3) is
+      Aux : constant DLD_Field := (As_Bits => False, DLD => DLD);
+
+   begin
+      CDB.DLD0 := Aux.DLD0;
+      CDB.DLD1 := Aux.DLD1;
+      CDB.DLD2 := Aux.DLD2;
+   end Set_DLD;
+
+   -------------
+   -- Set_DLD --
+   -------------
+
+   procedure Set_DLD (CDB : in out WRITE_16_CDB; DLD : A0B.Types.Unsigned_3) is
       Aux : constant DLD_Field := (As_Bits => False, DLD => DLD);
 
    begin
