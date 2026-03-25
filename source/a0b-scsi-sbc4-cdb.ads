@@ -18,6 +18,8 @@ package A0B.SCSI.SBC4.CDB with Pure is
    READ_CAPACITY_10_CDB_Length : constant := 10;
    READ_CAPACITY_16_CDB_Length : constant := 16;
    WRITE_10_CDB_Length         : constant := 10;
+   WRITE_12_CDB_Length         : constant := 12;
+   WRITE_16_CDB_Length         : constant := 16;
 
    -------------------
    -- READ(10) [28] --
@@ -294,5 +296,50 @@ package A0B.SCSI.SBC4.CDB with Pure is
       TRANSFER_LENGTH       at 7 range 0 .. 15;
       CONTROL               at 9 range 0 .. 7;
    end record;
+
+   WRITE_10_LOGICAL_BLOCK_ADDRESS : constant A0B.SCSI.SPC5.CDB_Field_Byte := 2;
+   WRITE_10_TRANSFER_LENGTH       : constant A0B.SCSI.SPC5.CDB_Field_Byte := 7;
+
+   --------------------
+   -- WRITE(12) [AA] --
+   --------------------
+
+   type WRITE_12_CDB is record
+      OPERATION_CODE        : A0B.SCSI.SAM5.OPERATION_CODE :=
+        A0B.SCSI.SBC4.WRITE_12;
+      WRPROTECT             : A0B.Types.Unsigned_3;
+      DPO                   : Boolean;
+      FUA                   : Boolean;
+      Reserved_1_2_2        : A0B.Types.Reserved_1 := A0B.Types.Zero;
+      Obsolete_1_1_1        : A0B.Types.Reserved_1 := A0B.Types.Zero;
+      Obsolete_1_0_0        : A0B.Types.Reserved_1 := A0B.Types.Zero;
+      LOGICAL_BLOCK_ADDRESS : A0B.Types.Big_Endian.Unsigned_32;
+      TRANSFER_LENGTH       : A0B.Types.Big_Endian.Unsigned_32;
+      Restricted_For_MMC_6  : A0B.Types.Reserved_1 := A0B.Types.Zero;
+      Reserved_10_6_6       : A0B.Types.Reserved_1 := A0B.Types.Zero;
+      GROUP_NUMBER          : A0B.Types.Unsigned_6;
+      CONTROL               : A0B.SCSI.SAM5.CONTROL;
+   end record
+     with Size      => WRITE_12_CDB_Length * Byte_Size,
+          Bit_Order => System.Low_Order_First;
+
+   for WRITE_12_CDB use record
+      OPERATION_CODE        at 0 range 0 .. 7;
+      Obsolete_1_0_0        at 1 range 0 .. 0;
+      Obsolete_1_1_1        at 1 range 1 .. 1;
+      Reserved_1_2_2        at 1 range 2 .. 2;
+      FUA                   at 1 range 3 .. 3;
+      DPO                   at 1 range 4 .. 4;
+      WRPROTECT             at 1 range 5 .. 7;
+      LOGICAL_BLOCK_ADDRESS at 2 range 0 .. 31;
+      TRANSFER_LENGTH       at 6 range 0 .. 31;
+      GROUP_NUMBER          at 10 range 0 .. 5;
+      Reserved_10_6_6       at 10 range 6 .. 6;
+      Restricted_For_MMC_6  at 10 range 7 .. 7;
+      CONTROL               at 11 range 0 .. 7;
+   end record;
+
+   WRITE_12_LOGICAL_BLOCK_ADDRESS : constant A0B.SCSI.SPC5.CDB_Field_Byte := 2;
+   WRITE_12_TRANSFER_LENGTH       : constant A0B.SCSI.SPC5.CDB_Field_Byte := 6;
 
 end A0B.SCSI.SBC4.CDB;

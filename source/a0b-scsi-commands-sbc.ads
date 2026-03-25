@@ -29,7 +29,10 @@ package A0B.SCSI.Commands.SBC with Pure is
       ALLOCATION_LENGTH : A0B.Types.Unsigned_32;
    end record;
 
+   type WRITE_Variant is (WRITE_6, WRITE_10, WRITE_12, WRITE_16, WRITE_32);
+
    type WRITE_Command_Descriptor is record
+      Variant               : WRITE_Variant;
       GROUP_NUMBER          : A0B.Types.Unsigned_6;
       LOGICAL_BLOCK_ADDRESS : A0B.Types.Unsigned_64;
       TRANSFER_LENGTH       : A0B.Types.Unsigned_32;

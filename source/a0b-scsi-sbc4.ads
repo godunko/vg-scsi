@@ -17,6 +17,8 @@ package A0B.SCSI.SBC4 with Pure is
    READ_CAPACITY_10 : constant A0B.SCSI.SAM5.OPERATION_CODE := 16#25#;
    WRITE_6          : constant A0B.SCSI.SAM5.OPERATION_CODE := 16#0A#;
    WRITE_10         : constant A0B.SCSI.SAM5.OPERATION_CODE := 16#2A#;
+   WRITE_12         : constant A0B.SCSI.SAM5.OPERATION_CODE := 16#AA#;
+   WRITE_16         : constant A0B.SCSI.SAM5.OPERATION_CODE := 16#8A#;
 
    READ_CAPACITY_16 : constant A0B.SCSI.SAM5.SERVICE_ACTION := 16#10#;
 
