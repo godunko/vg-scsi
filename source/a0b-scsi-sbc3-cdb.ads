@@ -87,21 +87,25 @@ package A0B.SCSI.SBC3.CDB with Pure is
       CONTROL                        at 5 range 0 .. 7;
    end record;
 
+   WRITE_6_LOGICAL_BLOCK_ADDRESS : constant A0B.SCSI.SPC5.CDB_Field_Byte_Bit :=
+     (1, 4);
+   WRITE_6_TRANSFER_LENGTH       : constant A0B.SCSI.SPC5.CDB_Field_Byte := 4;
+
    function LOGICAL_BLOCK_ADDRESS
      (CDB : WRITE_6_CDB) return A0B.Types.Unsigned_64 with Inline;
-   --  Returns value of `LOGICAL BLOCK ADDRESS` component of READ(6) command
+   --  Returns value of `LOGICAL BLOCK ADDRESS` component of WRITE(6) command
    --  descriptor.
 
    function Reserved_1_7_7 (CDB : WRITE_6_CDB) return A0B.Types.Reserved_1;
-   --  Returns value of `Reserved_1_7_7` component of READ(6) command
+   --  Returns value of `Reserved_1_7_7` component of WRITE(6) command
    --  descriptor.
 
    function Reserved_1_6_6 (CDB : WRITE_6_CDB) return A0B.Types.Reserved_1;
-   --  Returns value of `Reserved_1_6_6` component of READ(6) command
+   --  Returns value of `Reserved_1_6_6` component of WRITE(6) command
    --  descriptor.
 
    function Reserved_1_5_5 (CDB : WRITE_6_CDB) return A0B.Types.Reserved_1;
-   --  Returns value of `Reserved_1_5_5` component of READ(6) command
+   --  Returns value of `Reserved_1_5_5` component of WRITE(6) command
    --  descriptor.
 
 end A0B.SCSI.SBC3.CDB;
