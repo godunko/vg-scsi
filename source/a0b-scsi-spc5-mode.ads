@@ -13,6 +13,8 @@ package A0B.SCSI.SPC5.Mode with Pure is
    MODE_6_Header_Length  : constant := 4;
    MODE_10_Header_Length : constant := 8;
 
+   type DEVICE_SPECIFIC_PARAMETER is new A0B.Types.Unsigned_8;
+
    ------------------------------------
    --  MODE SENSE(6)/MODE SELECT(6)  --
    ------------------------------------
@@ -20,7 +22,7 @@ package A0B.SCSI.SPC5.Mode with Pure is
    type MODE_6_Header is record
       MODE_DATA_LENGTH          : A0B.Types.Unsigned_8 := 0;
       MEDIUM_TYPE               : A0B.Types.Unsigned_8;
-      DEVICE_SPECIFIC_PARAMETER : A0B.Types.Unsigned_8;
+      DEVICE_SPECIFIC_PARAMETER : A0B.SCSI.SPC5.Mode.DEVICE_SPECIFIC_PARAMETER;
       BLOCK_DESCRIPTOR_LENGTH   : A0B.Types.Unsigned_8;
    end record
      with Size      => MODE_6_Header_Length * Byte_Size,
@@ -41,7 +43,7 @@ package A0B.SCSI.SPC5.Mode with Pure is
       MODE_DATA_LENGTH          : A0B.Types.Big_Endian.Unsigned_16 :=
         (Value => 0);
       MEDIUM_TYPE               : A0B.Types.Unsigned_8;
-      DEVICE_SPECIFIC_PARAMETER : A0B.Types.Unsigned_8;
+      DEVICE_SPECIFIC_PARAMETER : A0B.SCSI.SPC5.Mode.DEVICE_SPECIFIC_PARAMETER;
       Reserve_4_7_1             : A0B.Types.Reserved_7 := A0B.Types.Zero;
       LONGLBA                   : Boolean := False;
       Reserve_5                 : A0B.Types.Reserved_8 := A0B.Types.Zero;

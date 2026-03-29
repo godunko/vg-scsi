@@ -8,9 +8,15 @@ with System;
 
 with A0B.Types.Big_Endian;
 
+with A0B.SCSI.SPC5.Mode;
+
 package A0B.SCSI.SBC4.Mode with Pure is
 
    Caching_Mode_Page_Length : constant := 20;
+
+   function To_DEVICE_SPECIFIC_PARAMETER
+     (WP     : Boolean;
+      DPOFUA : Boolean) return A0B.SCSI.SPC5.Mode.DEVICE_SPECIFIC_PARAMETER;
 
    -------------------------
    --  Caching mode page  --
