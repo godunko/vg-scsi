@@ -10,13 +10,13 @@ with A0B.SCSI.SAM5;
 
 package A0B.SCSI.SPC5 with Pure is
 
-   INQUIRY         : constant A0B.SCSI.SAM5.OPERATION_CODE := 16#12#;  --  18
-   MODE_SENSE_6    : constant A0B.SCSI.SAM5.OPERATION_CODE := 16#1A#;  --  26
-   REPORT_LUNS     : constant A0B.SCSI.SAM5.OPERATION_CODE := 16#A0#;  --  160
-   REQUEST_SENSE   : constant A0B.SCSI.SAM5.OPERATION_CODE := 16#03#;  --  3
-   SERVICE_ACTION_IN_16 :
-                     constant A0B.SCSI.SAM5.OPERATION_CODE := 16#9E#;  --  158
-   TEST_UNIT_READY : constant A0B.SCSI.SAM5.OPERATION_CODE := 16#00#;  --  0
+   INQUIRY              : constant A0B.SCSI.SAM5.OPERATION_CODE := 16#12#;
+   MODE_SENSE_6         : constant A0B.SCSI.SAM5.OPERATION_CODE := 16#1A#;
+   MODE_SENSE_10        : constant A0B.SCSI.SAM5.OPERATION_CODE := 16#5A#;
+   REPORT_LUNS          : constant A0B.SCSI.SAM5.OPERATION_CODE := 16#A0#;
+   REQUEST_SENSE        : constant A0B.SCSI.SAM5.OPERATION_CODE := 16#03#;
+   SERVICE_ACTION_IN_16 : constant A0B.SCSI.SAM5.OPERATION_CODE := 16#9E#;
+   TEST_UNIT_READY      : constant A0B.SCSI.SAM5.OPERATION_CODE := 16#00#;
 
    --  type Mode_Page_Code is new A0B.Types.Unsigned_6;
    type VPD_Page_Code  is new A0B.Types.Unsigned_8;

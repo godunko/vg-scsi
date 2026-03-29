@@ -12,6 +12,7 @@ package A0B.SCSI.SPC5.CDB with Pure is
 
    INQUIRY_CDB_Length              : constant := 6;
    MODE_SENSE_6_CDB_Length         : constant := 6;
+   MODE_SENSE_10_CDB_Length        : constant := 10;
    REPORT_LUNS_CDB_Length          : constant := 12;
    REQUEST_SENSE_CDB_Length        : constant := 6;
    SERVICE_ACTION_IN_16_CDB_Length : constant := 16;
@@ -96,6 +97,53 @@ package A0B.SCSI.SPC5.CDB with Pure is
       SUBPAGE_CODE      at 3 range 0 .. 7;
       ALLOCATION_LENGTH at 4 range 0 .. 7;
       CONTROL           at 5 range 0 .. 7;
+   end record;
+
+   ---------------------------
+   --  MODE SENSE(10) [5A]  --
+   ---------------------------
+
+   type MODE_SENSE_10_CDB is record
+      OPERATION_CODE    : A0B.SCSI.SAM5.OPERATION_CODE :=
+        A0B.SCSI.SPC5.MODE_SENSE_10;
+      Reserved_1_7_7    : A0B.Types.Reserved_1 := A0B.Types.Zero;
+      Reserved_1_6_6    : A0B.Types.Reserved_1 := A0B.Types.Zero;
+      Reserved_1_5_5    : A0B.Types.Reserved_1 := A0B.Types.Zero;
+      LLBAA             : Boolean              := False;
+      DBD               : Boolean              := False;
+      Reserved_1_2_2    : A0B.Types.Reserved_1 := A0B.Types.Zero;
+      Reserved_1_1_1    : A0B.Types.Reserved_1 := A0B.Types.Zero;
+      Reserved_1_0_0    : A0B.Types.Reserved_1 := A0B.Types.Zero;
+      PC                : A0B.Types.Unsigned_2;
+      PAGE_CODE         : A0B.SCSI.SPC5.Mode_Page_Code;
+      SUBPAGE_CODE      : A0B.Types.Unsigned_8;
+      Reserved_4        : A0B.Types.Reserved_8 := A0B.Types.Zero;
+      Reserved_5        : A0B.Types.Reserved_8 := A0B.Types.Zero;
+      Reserved_6        : A0B.Types.Reserved_8 := A0B.Types.Zero;
+      ALLOCATION_LENGTH : A0B.Types.Big_Endian.Unsigned_16;
+      CONTROL           : A0B.SCSI.SAM5.CONTROL;
+   end record
+     with Size      => MODE_SENSE_10_CDB_Length * Byte_Size,
+          Bit_Order => System.Low_Order_First;
+
+   for MODE_SENSE_10_CDB use record
+      OPERATION_CODE    at 0 range 0 .. 7;
+      Reserved_1_0_0    at 1 range 0 .. 0;
+      Reserved_1_1_1    at 1 range 1 .. 1;
+      Reserved_1_2_2    at 1 range 2 .. 2;
+      DBD               at 1 range 3 .. 3;
+      LLBAA             at 1 range 4 .. 4;
+      Reserved_1_5_5    at 1 range 5 .. 5;
+      Reserved_1_6_6    at 1 range 6 .. 6;
+      Reserved_1_7_7    at 1 range 7 .. 7;
+      PAGE_CODE         at 2 range 0 .. 5;
+      PC                at 2 range 6 .. 7;
+      SUBPAGE_CODE      at 3 range 0 .. 7;
+      Reserved_4        at 4 range 0 .. 7;
+      Reserved_5        at 5 range 0 .. 7;
+      Reserved_6        at 6 range 0 .. 7;
+      ALLOCATION_LENGTH at 7 range 0 .. 15;
+      CONTROL           at 9 range 0 .. 7;
    end record;
 
    ----------------------
