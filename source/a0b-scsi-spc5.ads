@@ -58,7 +58,8 @@ package A0B.SCSI.SPC5 with Pure is
      (16#21#, 16#00#);
    MEDIUM_NOT_PRESENT                 : constant A0B.SCSI.SAM5.Sense_Code :=
      (16#3A#, 16#00#);
-
+   WRITE_PROTECTED                    : constant A0B.SCSI.SAM5.Sense_Code :=
+     (16#27#, 16#00#);
    --  OVERLAPPED_COMMAND_ATTEMPTED   : constant A0B.SCSI.SAM5.Sense_Code :=
    --    (16#B#, 16#4E#, 16#00#);
 
