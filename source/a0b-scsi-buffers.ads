@@ -24,6 +24,9 @@ package A0B.SCSI.Buffers with Pure is
    function Allocation_Length
      (Self : Data_Buffer'CLass) return A0B.Types.Unsigned_32;
 
+   function Actual_Length
+     (Self : Data_Buffer'CLass) return A0B.Types.Unsigned_32;
+
    function Length (Self : Data_Buffer'CLass) return A0B.Types.Unsigned_32;
    --  Returns minimum of the actual length and the allocation length. This is
    --  the length that should be used for data transfers.

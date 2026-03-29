@@ -6,6 +6,16 @@ with System.Storage_Elements;
 
 package body A0B.SCSI.Buffers is
 
+   -------------------
+   -- Actual_Length --
+   -------------------
+
+   function Actual_Length
+     (Self : Data_Buffer'CLass) return A0B.Types.Unsigned_32 is
+   begin
+      return Self.Length;
+   end Actual_Length;
+
    -------------
    -- Address --
    -------------
