@@ -99,6 +99,10 @@ package A0B.SCSI.SPC5.CDB with Pure is
       CONTROL           at 5 range 0 .. 7;
    end record;
 
+   MODE_SENSE_6_PC           : constant CDB_Field_Byte_Bit := (2, 7);
+   MODE_SENSE_6_PAGE_CODE    : constant CDB_Field_Byte_Bit := (2, 5);
+   MODE_SENSE_6_SUBPAGE_CODE : constant CDB_Field_Byte     := 3;
+
    ---------------------------
    --  MODE SENSE(10) [5A]  --
    ---------------------------
@@ -145,6 +149,10 @@ package A0B.SCSI.SPC5.CDB with Pure is
       ALLOCATION_LENGTH at 7 range 0 .. 15;
       CONTROL           at 9 range 0 .. 7;
    end record;
+
+   MODE_SENSE_10_PC           : constant CDB_Field_Byte_Bit := (2, 7);
+   MODE_SENSE_10_PAGE_CODE    : constant CDB_Field_Byte_Bit := (2, 5);
+   MODE_SENSE_10_SUBPAGE_CODE : constant CDB_Field_Byte     := 3;
 
    ----------------------
    -- REPORT LUNS [A0] --
