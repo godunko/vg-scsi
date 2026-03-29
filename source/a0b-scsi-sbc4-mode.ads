@@ -12,15 +12,16 @@ with A0B.SCSI.SPC5.Mode;
 
 package A0B.SCSI.SBC4.Mode with Pure is
 
-   Caching_Mode_Page_Length : constant := 20;
+   Caching_Mode_Page_Length                          : constant := 20;
+   Informational_Exceptions_Control_Mode_Page_Length : constant := 12;
 
    function To_DEVICE_SPECIFIC_PARAMETER
      (WP     : Boolean;
       DPOFUA : Boolean) return A0B.SCSI.SPC5.Mode.DEVICE_SPECIFIC_PARAMETER;
 
-   -------------------------
-   --  Caching mode page  --
-   -------------------------
+   ----------------------------
+   -- Caching mode page [08] --
+   ----------------------------
 
    type Caching_Mode_Page is record
       PS                                : Boolean;
@@ -93,6 +94,52 @@ package A0B.SCSI.SBC4.Mode with Pure is
       CACHE_SEGMENT_SIZE                at 14 range 0 .. 15;
       Reserved_16                       at 16 range 0 .. 7;
       Obsolete_17_19                    at 17 range 0 .. 23;
+   end record;
+
+   -------------------------------------------
+   -- Informational Exceptions Control [1C] --
+   -------------------------------------------
+
+   type Informational_Exceptions_Control_Mode_Page is record
+      PS             : Boolean;
+      SPF            : Boolean                  := False;
+      PAGE_CODE      : SCSI.SPC5.Mode_Page_Code :=
+        A0B.SCSI.SBC4.Informational_Exceptions_Control;
+      PAGE_LENGTH    : A0B.Types.Unsigned_8     := 16#0A#;
+      PERF           : Boolean;
+      Reserved_2_6_6 : A0B.Types.Reserved_1     := A0B.Types.Zero;
+      EBF            : Boolean;
+      EWASC          : Boolean;
+      DEXCPT         : Boolean;
+      TEST           : Boolean;
+      EBACKERR       : Boolean;
+      LOGERR         : Boolean;
+      Reserved_3_7_4 : A0B.Types.Reserved_4 := A0B.Types.Zero;
+      MRIE           : A0B.Types.Unsigned_4;
+      INTERVAL_TIMER : A0B.Types.Big_Endian.Unsigned_32;
+      REPORT_COUNT   : A0B.Types.Big_Endian.Unsigned_32;
+   end record
+     with Size      =>
+            Informational_Exceptions_Control_Mode_Page_Length * Byte_Size,
+          Bit_Order => System.Low_Order_First;
+
+   for Informational_Exceptions_Control_Mode_Page use record
+      PAGE_CODE      at 0 range 0 .. 5;
+      SPF            at 0 range 6 .. 6;
+      PS             at 0 range 7 .. 7;
+      PAGE_LENGTH    at 1 range 0 .. 7;
+      LOGERR         at 2 range 0 .. 0;
+      EBACKERR       at 2 range 1 .. 1;
+      TEST           at 2 range 2 .. 2;
+      DEXCPT         at 2 range 3 .. 3;
+      EWASC          at 2 range 4 .. 4;
+      EBF            at 2 range 5 .. 5;
+      Reserved_2_6_6 at 2 range 6 .. 6;
+      PERF           at 2 range 7 .. 7;
+      MRIE           at 3 range 0 .. 3;
+      Reserved_3_7_4 at 3 range 4 .. 7;
+      INTERVAL_TIMER at 4 range 0 .. 31;
+      REPORT_COUNT   at 8 range 0 .. 31;
    end record;
 
 end A0B.SCSI.SBC4.Mode;
