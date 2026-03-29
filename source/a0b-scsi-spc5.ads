@@ -30,6 +30,8 @@ package A0B.SCSI.SPC5 with Pure is
    All_Pages : constant Mode_Page_Code := 16#3F#;
    Control   : constant Mode_Page_Code := 16#0A#;
 
+   Control_Extension : constant Mode_Subpage_Code := 16#01#;
+
    ----------------
    -- Sense Data --
    ----------------
