@@ -26,7 +26,7 @@ package A0B.SCSI.SBC4.Mode with Pure is
       PS                                : Boolean;
       SPF                               : Boolean               := False;
       PAGE_CODE                         : A0B.SCSI.SPC5.Mode_Page_Code :=
-        Caching;
+        A0B.SCSI.SBC4.Caching;
       PAGE_LENGTH                       : A0B.Types.Unsigned_8  := 16#12#;
       IC                                : Boolean;
       --  Initiator control
