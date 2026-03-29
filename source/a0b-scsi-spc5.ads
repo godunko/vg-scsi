@@ -27,7 +27,8 @@ package A0B.SCSI.SPC5 with Pure is
    type Mode_Page_Code is new A0B.Types.Enumerable.Enumerable_6;
    type Mode_Subpage_Code is new A0B.Types.Enumerable.Enumerable_8;
 
-   All_Pages                              : constant Mode_Page_Code := 16#3F#;
+   All_Pages : constant Mode_Page_Code := 16#3F#;
+   Control   : constant Mode_Page_Code := 16#0A#;
 
    ----------------
    -- Sense Data --
