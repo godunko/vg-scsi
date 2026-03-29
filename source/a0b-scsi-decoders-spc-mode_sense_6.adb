@@ -69,7 +69,7 @@ package body A0B.SCSI.Decoders.SPC.MODE_SENSE_6 is
 
          Descriptor :=
            (Variant           => A0B.SCSI.Commands.SPC.MODE_SENSE_6,
-            LLBAA             => False,
+            LLBAA             => False,  --  Not present in MODE SENSE(6)
             DBD               => CDB.DBD,
             PC                => CDB.PC,
             PAGE_CODE         => CDB.PAGE_CODE,
