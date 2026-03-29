@@ -14,6 +14,7 @@ package A0B.SCSI.SBC4.Mode with Pure is
 
    Caching_Mode_Page_Length                          : constant := 20;
    Informational_Exceptions_Control_Mode_Page_Length : constant := 12;
+   Read_Write_Error_Recovery_Mode_Page_Length        : constant := 12;
 
    function To_DEVICE_SPECIFIC_PARAMETER
      (WP     : Boolean;
@@ -140,6 +141,72 @@ package A0B.SCSI.SBC4.Mode with Pure is
       Reserved_3_7_4 at 3 range 4 .. 7;
       INTERVAL_TIMER at 4 range 0 .. 31;
       REPORT_COUNT   at 8 range 0 .. 31;
+   end record;
+
+   ------------------------------------
+   -- Read-Write Error Recovery [01] --
+   ------------------------------------
+
+   type Read_Write_Error_Recovery_Mode_Page is record
+      PS                   : Boolean;
+      SPF                  : Boolean                  := False;
+      PAGE_CODE            : SCSI.SPC5.Mode_Page_Code :=
+        A0B.SCSI.SBC4.Read_Write_Error_Recovery;
+      PAGE_LENGTH          : A0B.Types.Unsigned_8     := 16#0A#;
+      AWRE                 : Boolean;
+      --  Automatic write reallocation enabled
+      ARRE                 : Boolean;
+      --  Automatic read reallocation enabled
+      TB                   : Boolean;
+      --  Transfer block
+      RC                   : Boolean;
+      --  Read continuous
+      Obsolete_2_3_3       : A0B.Types.Reserved_1     := A0B.Types.Zero;
+      PER                  : Boolean;
+      --  Post error
+      DTE                  : Boolean;
+      --  Data terminate on error
+      Obsolete_2_0_0       : A0B.Types.Reserved_1     := A0B.Types.Zero;
+      READ_RETRY_COUNT     : A0B.Types.Unsigned_8;
+      Obsolete_4           : A0B.Types.Reserved_8     := A0B.Types.Zero;
+      Obsolete_5           : A0B.Types.Reserved_8     := A0B.Types.Zero;
+      Obsolete_6           : A0B.Types.Reserved_8     := A0B.Types.Zero;
+      LBPERE               : Boolean;
+      MWR                  : A0B.Types.Unsigned_2;
+      Reserved_7_4_2       : A0B.Types.Reserved_3     := A0B.Types.Zero;
+      Restricted_For_MMC_6 : A0B.Types.Reserved_2     := A0B.Types.Zero;
+      WRITE_RETRY_COUNT    : A0B.Types.Unsigned_8;
+      Reserved_9           : A0B.Types.Reserved_8     := A0B.Types.Zero;
+      RECOVERY_TIME_LIMIT  : A0B.Types.Big_Endian.Unsigned_16;
+   end record
+     with Size      =>
+            Read_Write_Error_Recovery_Mode_Page_Length * Byte_Size,
+          Bit_Order => System.Low_Order_First;
+
+   for Read_Write_Error_Recovery_Mode_Page use record
+      PAGE_CODE            at 0 range 0 .. 5;
+      SPF                  at 0 range 6 .. 6;
+      PS                   at 0 range 7 .. 7;
+      PAGE_LENGTH          at 1 range 0 .. 7;
+      Obsolete_2_0_0       at 2 range 0 .. 0;
+      DTE                  at 2 range 1 .. 1;
+      PER                  at 2 range 2 .. 2;
+      Obsolete_2_3_3       at 2 range 3 .. 3;
+      RC                   at 2 range 4 .. 4;
+      TB                   at 2 range 5 .. 5;
+      ARRE                 at 2 range 6 .. 6;
+      AWRE                 at 2 range 7 .. 7;
+      READ_RETRY_COUNT     at 3 range 0 .. 7;
+      Obsolete_4           at 4 range 0 .. 7;
+      Obsolete_5           at 5 range 0 .. 7;
+      Obsolete_6           at 6 range 0 .. 7;
+      Restricted_For_MMC_6 at 7 range 0 .. 1;
+      Reserved_7_4_2       at 7 range 2 .. 4;
+      MWR                  at 7 range 5 .. 6;
+      LBPERE               at 7 range 7 .. 7;
+      WRITE_RETRY_COUNT    at 8 range 0 .. 7;
+      Reserved_9           at 9 range 0 .. 7;
+      RECOVERY_TIME_LIMIT  at 10 range 0 .. 15;
    end record;
 
 end A0B.SCSI.SBC4.Mode;

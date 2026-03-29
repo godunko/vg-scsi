@@ -22,9 +22,11 @@ package A0B.SCSI.SBC4 with Pure is
 
    READ_CAPACITY_16 : constant A0B.SCSI.SAM5.SERVICE_ACTION := 16#10#;
 
-   Caching                          : constant A0B.SCSI.SPC5.Mode_Page_Code :=
-     16#08#;
-   Informational_Exceptions_Control : constant A0B.SCSI.SPC5.Mode_Page_Code :=
-     16#1C#;
+   Caching                          :
+     constant A0B.SCSI.SPC5.Mode_Page_Code := 16#08#;
+   Informational_Exceptions_Control :
+     constant A0B.SCSI.SPC5.Mode_Page_Code := 16#1C#;
+   Read_Write_Error_Recovery        :
+     constant A0B.SCSI.SPC5.Mode_Page_Code := 16#01#;
 
 end A0B.SCSI.SBC4;
