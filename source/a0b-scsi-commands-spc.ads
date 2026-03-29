@@ -25,7 +25,7 @@ package A0B.SCSI.Commands.SPC with Pure is
       DBD               : Boolean;
       PC                : A0B.Types.Unsigned_2;
       PAGE_CODE         : A0B.SCSI.SPC5.Mode_Page_Code;
-      SUBPAGE_CODE      : A0B.Types.Unsigned_8;
+      SUBPAGE_CODE      : A0B.SCSI.SPC5.Mode_Subpage_Code;
    end record;
 
    type REPORT_LUNS_Command_Descriptor is record

@@ -4,7 +4,7 @@
 
 --  SCSI Primary Commands - 5 (SPC-5)
 
-with A0B.Types;
+with A0B.Types.Enumerable;
 
 with A0B.SCSI.SAM5;
 
@@ -24,7 +24,8 @@ package A0B.SCSI.SPC5 with Pure is
    Supported_VPD_Pages_VPD_Page_Code : constant VPD_Page_Code := 16#00#;
    --  Unit_Serial_Number_VPD_Page_Code  : constant VPD_Page_Code := 16#80#;
 
-   type Mode_Page_Code is new A0B.Types.Unsigned_6;
+   type Mode_Page_Code is new A0B.Types.Enumerable.Enumerable_6;
+   type Mode_Subpage_Code is new A0B.Types.Enumerable.Enumerable_8;
 
    All_Pages                              : constant Mode_Page_Code := 16#3F#;
 

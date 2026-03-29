@@ -75,7 +75,7 @@ package A0B.SCSI.SPC5.CDB with Pure is
       Reserved_1_0_0    : A0B.Types.Reserved_1 := A0B.Types.Zero;
       PC                : A0B.Types.Unsigned_2;
       PAGE_CODE         : A0B.SCSI.SPC5.Mode_Page_Code;
-      SUBPAGE_CODE      : A0B.Types.Unsigned_8;
+      SUBPAGE_CODE      : A0B.SCSI.SPC5.Mode_Subpage_Code;
       ALLOCATION_LENGTH : A0B.Types.Unsigned_8;
       CONTROL           : A0B.SCSI.SAM5.CONTROL;
    end record
@@ -120,7 +120,7 @@ package A0B.SCSI.SPC5.CDB with Pure is
       Reserved_1_0_0    : A0B.Types.Reserved_1 := A0B.Types.Zero;
       PC                : A0B.Types.Unsigned_2;
       PAGE_CODE         : A0B.SCSI.SPC5.Mode_Page_Code;
-      SUBPAGE_CODE      : A0B.Types.Unsigned_8;
+      SUBPAGE_CODE      : A0B.SCSI.SPC5.Mode_Subpage_Code;
       Reserved_4        : A0B.Types.Reserved_8 := A0B.Types.Zero;
       Reserved_5        : A0B.Types.Reserved_8 := A0B.Types.Zero;
       Reserved_6        : A0B.Types.Reserved_8 := A0B.Types.Zero;
