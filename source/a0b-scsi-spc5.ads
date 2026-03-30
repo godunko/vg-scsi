@@ -18,11 +18,10 @@ package A0B.SCSI.SPC5 with Pure is
    SERVICE_ACTION_IN_16 : constant A0B.SCSI.SAM5.OPERATION_CODE := 16#9E#;
    TEST_UNIT_READY      : constant A0B.SCSI.SAM5.OPERATION_CODE := 16#00#;
 
-   --  type Mode_Page_Code is new A0B.Types.Unsigned_6;
-   type VPD_Page_Code  is new A0B.Types.Unsigned_8;
+   type VPD_Page_Code  is new A0B.Types.Enumerable.Enumerable_8;
 
-   Supported_VPD_Pages_VPD_Page_Code : constant VPD_Page_Code := 16#00#;
-   --  Unit_Serial_Number_VPD_Page_Code  : constant VPD_Page_Code := 16#80#;
+   Supported_VPD_Pages : constant VPD_Page_Code := 16#00#;
+   Unit_Serial_Number  : constant VPD_Page_Code := 16#80#;
 
    type Mode_Page_Code is new A0B.Types.Enumerable.Enumerable_6;
    type Mode_Subpage_Code is new A0B.Types.Enumerable.Enumerable_8;
